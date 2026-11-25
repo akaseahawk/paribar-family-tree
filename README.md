@@ -10,22 +10,26 @@ Every name in this repo is made up. Real family data never goes in this repo.
 
 ## Why I built this
 
-I went back to India after 20 years and knew exactly two relatives by name and phone number. That was it. I built Paribar so that the next time I visit, years from now, I can reach out to everyone directly and keep in touch.
+I went back to India after 20 years knowing only two relatives, both very elderly, and just their names and phone numbers. I built Paribar so that the next time I visit, years from now, I can reach out to everyone directly and keep in touch.
 
 ```mermaid
 flowchart TD
-  A["Chicken scratch<br/>on paper"] --> B["One photo"]
-  B --> C["AI chat turns it<br/>into a CSV"]
-  D["Phone contacts"] --> E["Paribar"]
-  C --> E
-  E --> F["Tree + circles<br/>to show everyone"]
-  F --> G["Stories that<br/>never came up before"]
-  G --> H["Shared with<br/>the kids, kept for good"]
+  A["A month of visits<br/>home to home"] --> B["Draw it on paper<br/>snap a photo"]
+  A --> C["Phone in the middle<br/>of the room"]
+  C --> D["Hindi, Bengali, English<br/>all mixed together"]
+  D --> E["AI listens, transcribes,<br/>fills in what the<br/>family words imply"]
+  B --> E
+  E --> F["Paribar: tree<br/>and circles"]
+  G["Phone contacts"] --> F
+  F --> H["Nieces and nephews<br/>see how we connect"]
+  F --> I["Stories that never<br/>came up before"]
 ```
 
-- On that trip we drew the family out on paper, took one photo, and had the data. We imported phone contacts and took pictures of everyone, great-grandparents included.
-- When I showed them the family tree and the circles, they loved it.
-- The best part was the conversations: stories that never come up otherwise, like the wild thing a distant uncle once did. He's on the map now.
+- For a month I traveled to different homes, in different parts of the family.
+- At each one we drew the family on paper and snapped a photo. Then we put a phone in the middle of the room and just talked, in a mix of Hindi, Bengali and English, while an AI listened and turned it into the data.
+- It filled in what nobody says out loud, because the family words already carry it: a Mashi is your mother's sister, a Jethu your father's older brother.
+- At every stop I showed everyone how they were all connected. My little nieces and nephews got so excited about it.
+- The conversations were the best part: stories that never come up otherwise, like the wild thing a distant uncle once did. He's on the map now.
 - Family history still lives in memories, on paper, or in a photo on the wall. Paribar makes it digital, so you can share it with your kids and keep it, in theory, forever.
 
 With the holidays here and families getting together, I hope you get to have these conversations too.

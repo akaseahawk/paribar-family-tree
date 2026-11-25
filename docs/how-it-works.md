@@ -100,4 +100,4 @@ sequenceDiagram
   end
 ```
 
-Every CSS and JS link in index.html carries `?v=2010`, and sw.js uses a matching cache name (`paribar-v2010`) and drops older `paribar-v*` caches. So a phone never mixes old and new files after an update. Fonts are cache-first. The Android share target (sharing a contact to Paribar) is also handled in sw.js.
+Every CSS and JS link in index.html carries `?v=2011`, and sw.js uses a matching cache name (`paribar-v2011`) and drops older `paribar-v*` caches. So a phone never mixes old and new files after an update. Fonts are cache-first. The Android share target (sharing a contact to Paribar) is also handled in sw.js.

@@ -20,7 +20,7 @@ flowchart TD
 ## Tips
 
 - **You pick the model, the app doesn't.** This matters more than anything else. On a free plan, choose the most advanced model or setting you can. On a paid plan, choose the second most advanced, or any "thinking" model set to medium or high. High catches more nuance but can overthink it, so find the balance for your family.
-- **Talk, don't type.** Use voice mode. Bengali, Hindi, Spanish and mixing languages mid-sentence all work well spoken.
+- **Put the phone in the middle of the room.** Use voice mode and let everyone talk, elders especially. Mixing languages mid-sentence (Hindi, Bengali and English, or Spanish and English) works fine. The AI listens, transcribes, and turns it into the table.
 - **Draw it.** A quick hand-drawn tree on paper, photographed, works great. The AI turns it into a table and asks about what it couldn't read.
 - **Let it ask.** A good AI asks a lot of questions. Answer them: every question it asks is a wrong link it avoided. If it starts guessing, tell it "ask me instead".
 - **Leave birthdays for the app.** Add birthdays yourself in Paribar. They're easy to get wrong in a chat.
@@ -61,6 +61,8 @@ GOLDEN RULE: ASK, DON'T ASSUME
   - two people with the same name or the same family word (two Mashis, two Tía Lupes)
   - step, half, adopted or "by marriage"
   - a nickname that might be someone already listed
+- Family words carry structure, so use it. Mashi means mother's sister, Jethu means father's older brother, 舅舅 means mother's brother. Fill in what the word already settles without asking. Ask only about what it leaves open (Tía or Uncle could be either side).
+- This may be a voice conversation with several people in the room, often elders, mixing languages. Keep track of who is talking about whom, and ask if it isn't clear.
 - Batch your questions: a few at a time, simplest first.
 - In the final table, nothing may be a guess. Every value comes from something I said or confirmed.
 
