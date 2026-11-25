@@ -36,7 +36,7 @@ jobs:
           cp dist/paribar-standalone.html _site/download/paribar-standalone.html
           find _site -maxdepth 2 | sort
       - uses: actions/configure-pages@v6
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: _site
 
