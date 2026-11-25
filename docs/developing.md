@@ -32,9 +32,9 @@ flowchart TD
 ```
 
 ## Versioning checklist
-- `index.html`: the version label (`Paribar v2.0.9 …`) and every `?v=` tag.
-- `sw.js`: `CACHE = 'paribar-v209'`.
-- `package.json`: `"version": "2.0.9"`.
+- `index.html`: the version label (`Paribar v2.0.10 …`) and every `?v=` tag.
+- `sw.js`: `CACHE = 'paribar-v2010'`.
+- `package.json`: `"version": "2.0.10"`.
 - `docs/ai-prompt.md`: regenerate with `node scripts/export-prompt.js` after changing `js/aiprompt.js`.
 
 ## Rules for this repo

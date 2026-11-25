@@ -22,8 +22,8 @@ themes, aiprompt, checks, dupes, visits, dates, speak, treeimage and demo are he
 | `js/app.js` | Screens, forms, placing imported people, export |
 | `js/kinship.js` | Finds the path from you to anyone and picks the word for it |
 | `js/cultures.js` | Family words for 18 heritages, with an English fallback that handles "second cousin once removed" |
-| `js/family.js` | Couples, generations, separation, tree layout |
-| `js/mindmap.js` | The Separation map and Generations tree |
+| `js/family.js` | Couples, generations, steps between people, tree layout |
+| `js/mindmap.js` | The Family circles map (degrees of separation) and the Generations tree |
 | `js/io.js` | Reads CSV, JSON, Excel (.xlsx), ZIP and contacts; writes JSON, CSV, ZIP and .vcf; cleans every imported value |
 | `js/demo.js` | The made-up sample family |
 | `js/db.js` | Storage in the phone's browser |
@@ -100,4 +100,4 @@ sequenceDiagram
   end
 ```
 
-Every CSS and JS link in index.html carries `?v=209`, and sw.js uses a matching cache name (`paribar-v209`) and drops older `paribar-v*` caches. So a phone never mixes old and new files after an update. Fonts are cache-first. The Android share target (sharing a contact to Paribar) is also handled in sw.js.
+Every CSS and JS link in index.html carries `?v=2010`, and sw.js uses a matching cache name (`paribar-v2010`) and drops older `paribar-v*` caches. So a phone never mixes old and new files after an update. Fonts are cache-first. The Android share target (sharing a contact to Paribar) is also handled in sw.js.

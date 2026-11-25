@@ -30,7 +30,7 @@ jobs:
           set -euo pipefail
           python3 build-standalone.py
           mkdir -p _site/app/schema _site/download
-          cp site/index.html _site/index.html
+          cp -r site/. _site/
           cp -r index.html sw.js manifest.webmanifest css js vendor icons _site/app/
           cp schema/paribar-template.csv schema/paribar-backup.schema.json _site/app/schema/
           cp dist/paribar-standalone.html _site/download/paribar-standalone.html

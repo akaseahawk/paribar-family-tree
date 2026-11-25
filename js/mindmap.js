@@ -1,6 +1,6 @@
 /* =========================================================
    mindmap.js — the family map, two ways (D3)
-   mode 'mind': Separation view. The center person sits in the
+   mode 'mind': Circles view (degrees of separation). The center person sits in the
                 middle; faint rings mark degrees of separation
                 ("1 degree from me", "2 degrees" …). Couples are
                 one joined unit; children branch out from them.
@@ -175,7 +175,7 @@ FT.mindmap = (() => {
       angles.forEach((a, i) => { const nx = i + 1 < angles.length ? angles[i + 1] : angles[0] + 2 * Math.PI; if (nx - a > gap) { gap = nx - a; best = (a + nx) / 2; } });
       const t = guides.append('text').attr('class', 'mm-deglabel').attr('text-anchor', 'middle')
         .attr('x', rad * Math.sin(best)).attr('y', -rad * Math.cos(best) + 4);
-      t.text(`${d} degree${d > 1 ? 's' : ''} from ${focusName}`);
+      t.text(`${d} step${d > 1 ? 's' : ''} from ${focusName}`);
     });
 
     /* --- generations: one column each (youngest left, oldest right), labelled at the top --- */

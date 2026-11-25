@@ -257,7 +257,7 @@
     if (id === S.mapFocus) return '';
     const sub = S.mapSub || mapSubset(); // count degrees on what the map shows
     const d = FT.fam.degrees(S.mapFocus, sub.people, sub.rels, sub.adj).get(id);
-    return d ? ` · ${d} degree${d > 1 ? 's' : ''} from ${focusName()}` : ' · not connected';
+    return d ? ` · ${d} step${d > 1 ? 's' : ''} from ${focusName()}` : ' · not connected';
   }
   // Inline "Born" editor: full date, year, or decade
   function bornEditor(p, pre) {
@@ -1553,7 +1553,7 @@
   async function saveMapPicture() {
     const me = S.byId.get(S.meta.meId), focus = S.byId.get(S.mapFocus);
     const stampDay = FT.io.dobForInput(today());
-    let title = `Paribar · পরিবার: ${(focus && (focus.id === S.meta.meId ? me.name : focus.nickname || focus.name)) || ''}'s family · ${S.mapMode === 'gen' ? 'Generations' : 'Separation'}${S.mapLayer === 'all' ? '' : S.mapLayer === 'family' ? ' · family' : ' · friends'} · ${stampDay}`;
+    let title = `Paribar · পরিবার: ${(focus && (focus.id === S.meta.meId ? me.name : focus.nickname || focus.name)) || ''}'s family · ${S.mapMode === 'gen' ? 'Generations' : 'Family circles'}${S.mapLayer === 'all' ? '' : S.mapLayer === 'family' ? ' · family' : ' · friends'} · ${stampDay}`;
     // a highlight on screen: offer just that part, titled "Vivian is Ishaan's mother's sister · Vivian's family"
     let crop = null, kind = 'family-tree';
     const ids = hiIds(S.mapHi).filter((id) => FT.mindmap.isShown(id));

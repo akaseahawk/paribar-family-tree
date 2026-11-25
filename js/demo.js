@@ -45,8 +45,11 @@ FT.demo = (() => {
     ['meiFong', 'Lee Mei-fong', 'f', '1961', { city: 'Toronto' }],
     ['chiMing', 'Wong Chi-ming', 'm', '1926', { city: 'Hong Kong', deceased: true, died: '2004' }],
     ['siuLan', 'Chan Siu-lan', 'f', '1930', { city: 'Hong Kong', deceased: true, died: '2015' }],
-    // --- A friend of the family
+    // --- Friends who are family too
     ['daniel', 'Daniel Kim', 'm', '', { city: 'Austin, TX', notes: 'Next-door neighbor, carpools to school.' }],
+    ['jenny', 'Jenny Kim', 'f', '1982', { city: 'Austin, TX', notes: "Daniel's mom. Hosts the neighborhood Lunar New Year." }],
+    ['priya', 'Priya Shah', 'f', '1983', { nickname: 'Priya Auntie', city: 'Austin, TX', notes: "Mom's best friend since college. Like a third aunt." }],
+    ['leo', 'Leo Martinez', 'm', '2014', { city: 'Austin, TX', notes: 'Best friend from school, robotics club.' }],
   ];
   // child ← [mother, father]
   const PARENTS = {
@@ -57,11 +60,12 @@ FT.demo = (() => {
     mom: ['poPo', 'gungGung'], vivian: ['poPo', 'gungGung'], jason: ['poPo', 'gungGung'],
     ethan: ['vivian', 'kenneth'], chloe: ['vivian', 'kenneth'], lucas: ['michelle', 'jason'],
     gungGung: ['siuLan', 'chiMing'], kwokKeung: ['siuLan', 'chiMing'],
+    daniel: ['jenny'],
   };
   const SPOUSES = [['mom', 'baba'], ['thakuma', 'thakurda'], ['pishi', 'pishemoshai'], ['kakima', 'kaku'], ['kamala', 'haren'],
     ['poPo', 'gungGung'], ['vivian', 'kenneth'], ['michelle', 'jason'], ['siuLan', 'chiMing']];
   const SIBLINGS = [['thakuma', 'mamaThakurda'], ['poPo', 'meiFong']]; // their parents aren't in the tree
-  const FRIENDS = [['daniel', 'me', 'neighbor']];
+  const FRIENDS = [['daniel', 'me', 'neighbor'], ['priya', 'mom', 'friend'], ['leo', 'me', 'classmate']];
   const HERITAGE = { me: 'english', paternal: 'bengali', maternal: 'cantonese', inlaw: 'english' };
 
   // Build app records. uid: id maker, now: ISO timestamp

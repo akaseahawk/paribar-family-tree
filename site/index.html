@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Paribar · পরিবার — the family tree that knows what you call everyone</title>
-  <meta name="description" content="A free family tree and contact book for mixed, multilingual families. 18 heritages of family words. Works offline. No account, no server storage." />
+  <title>Paribar · পরিবার — see how everyone is connected</title>
+  <meta name="description" content="Map your whole family, and the friends who are family too, on a Generations tree and in Family circles. Draw it on paper, snap a photo, and keep it forever. 18 heritages. Works offline. No account." />
   <meta name="theme-color" content="#FBF6EE" />
   <link rel="icon" href="app/icons/icon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -44,6 +44,15 @@
     .card p { margin: 0; color: var(--muted); font-size: .96rem; }
     .sides { display: flex; flex-wrap: wrap; gap: 14px; margin: 10px 0 0; font-size: .92rem; color: var(--muted); }
     .sides i { display: inline-block; width: 11px; height: 11px; border-radius: 50%; border: 3px solid; margin-right: 6px; vertical-align: -1px; }
+    .maps { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; align-items: start; }
+    .shot { margin: 0; padding: 10px; }
+    .shot img { display: block; width: 100%; height: auto; max-height: 560px; object-fit: cover; object-position: top; border-radius: 10px; border: 1px solid var(--line); }
+    .shot figcaption { margin-top: 10px; color: var(--muted); font-size: .96rem; }
+    .shot figcaption b { display: block; color: var(--ink); }
+    .body { margin: 0; max-width: 38em; }
+    .story { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--red); border-radius: 14px; padding: 6px 18px; }
+    .story p { margin: 12px 0; }
+    .story .sign { color: var(--muted); }
     .privacy { background: var(--red-soft); border-radius: 14px; padding: 16px 18px; }
     .privacy p { margin: 0; }
     footer { margin: 56px 0 0; padding: 22px 0 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: .92rem; }
@@ -57,8 +66,8 @@
   </header>
 
   <main class="wrap">
-    <h1>The family tree that knows what you call everyone</h1>
-    <p class="lead">A free family tree and contact book for mixed, multilingual families. Add someone once and Paribar gives you the right word for them, in your family's own language: Mashi, 姨媽, Tía, Bua, Moster and more.</p>
+    <h1>See how everyone is connected</h1>
+    <p class="lead">Paribar maps your whole family, and the friends who are family too. See everyone fall into place on a Generations tree and in Family circles around you, find how any two people are related, and stay in touch. All in your family's own words: Mashi, 姨媽, Tía, Bua, Moster and more.</p>
     <div class="cta">
       <a class="btn primary" href="app/">Open the app</a>
       <a class="btn" href="download/paribar-standalone.html" download>Download single file</a>
@@ -74,19 +83,45 @@
       <li lang="ar">خالة <small>Khala</small></li>
     </ul>
 
+    <h2>Why I built this</h2>
+    <div class="story">
+      <p>I went back to India after 20 years and knew exactly two relatives by name and phone number. That was it. No other numbers, no idea who else was family. I built Paribar so that the next time I visit, years from now, I can reach out to everyone directly and keep in touch.</p>
+      <p>On that trip we sat down together and drew the family out in chicken scratch on paper. One photo of that page, and we had the data. We imported phone contacts and took pictures of everyone, great-grandparents included. When I showed them the family tree and the circles, they loved it.</p>
+      <p>The best part was the conversations. Mapping it all out brought up stories that never come up otherwise, like the wild thing a distant uncle once did. He's on the map now.</p>
+      <p>We live in a data-rich world, but family history still lives in what people remember, on scraps of paper, or in a photo of an ancestor on the wall. Paribar makes it digital, so you can share it with your kids and keep it, in theory, forever.</p>
+      <p class="sign">With the holidays here and families getting together, I hope you get to have these conversations too.<br/>— <a href="https://github.com/akaseahawk">akaseahawk</a></p>
+    </div>
+
+    <h2>Two ways to see your family</h2>
+    <div class="maps">
+      <figure class="card shot">
+        <a href="images/map-circles.png"><img src="images/map-circles.png" width="1400" height="1436" loading="lazy" alt="Family circles: the sample family in rings around Ishaan, with friends linked by dashed blue lines" /></a>
+        <figcaption><b>Family circles</b>You're in the middle. Everyone sits on a circle by how many steps away they are: parents and siblings close in, grandparents and cousins further out. Friends link in with dashed blue lines.</figcaption>
+      </figure>
+      <figure class="card shot">
+        <a href="images/map-generations.png"><img src="images/map-generations.png" width="1100" height="2034" loading="lazy" alt="Generations tree: the sample family in columns by generation, couples side by side, with friends in their own band" /></a>
+        <figcaption><b>Generations tree</b>Each generation gets its own column, with couples side by side and friends in their own band. Tap anyone to light up the path from you.</figcaption>
+      </figure>
+    </div>
+
+    <h2>Friends can be family too</h2>
+    <p class="body">Add the neighbor who's practically an uncle, Mom's best friend the kids call Auntie, a colleague, a classmate. They show up on both maps, linked through whoever they know, and their families can join too. In a Bengali family, a friend's mother even gets a courtesy word like Mashima.</p>
+
     <h2>Start in four steps</h2>
     <ol class="steps">
-      <li><b>Open the app</b> on your phone. Tap <b>Load sample family</b> to look around first if you like.</li>
+      <li><b>Open the app</b> on your phone. Tap <b>Try the sample family first</b> and open the <b>Map</b> tab to explore both views.</li>
       <li><b>Start with you.</b> Add your name and pick the heritage of each side of your family.</li>
-      <li><b>Add family fast:</b> type them in, import your phone contacts, or copy the built-in AI prompt into ChatGPT, Gemini, Claude or Perplexity, talk it through in any language, and import the file it gives you.</li>
+      <li><b>Add family fast:</b> snap a photo of a family tree drawn on paper, import your phone contacts, or just talk. Copy the built-in AI prompt into ChatGPT, Gemini, Claude or Perplexity, send it the photo or talk it through in any language, and import the file it gives you.</li>
       <li><b>Install it:</b> use your browser's "Add to Home screen". It works offline after that.</li>
     </ol>
 
     <h2>What it does</h2>
     <div class="grid">
+      <div class="card"><b>Generations tree and Family circles</b><p>The whole family, and friends, on two maps. Zoom, find anyone, highlight a side, and save a picture to share.</p></div>
+      <div class="card"><b>Trails between people</b><p>Pick any two people and see exactly how they're related, step by step.</p></div>
+      <div class="card"><b>Friends who are family</b><p>Friends, neighbors, colleagues and classmates, with their own families, right on the map.</p></div>
       <div class="card"><b>18 heritages</b><p>Bengali, Cantonese, Hindi, Punjabi, Gujarati, Mandarin, Japanese, Korean, Vietnamese, Arabic, Yoruba, Spanish, English, French, German, Irish, Italian, Swedish.</p></div>
       <div class="card"><b>Mixed families</b><p>Each side of the family keeps its own words. Use the Language menu to see everyone in another heritage's words.</p></div>
-      <div class="card"><b>Maps and trails</b><p>See how anyone is related to you, or trace the trail between any two people.</p></div>
       <div class="card"><b>Contacts and visits</b><p>Phones, WhatsApp, addresses, photos, birthdays, and a log of visits and gifts.</p></div>
       <div class="card"><b>Themes</b><p>Ten heritage color and motif themes. Side colors never change, so maps keep their meaning.</p></div>
       <div class="card"><b>Your files</b><p>Back up to JSON, CSV (opens in Excel), ZIP with photos, or contacts (.vcf) for your phone. Imports Excel too.</p></div>

@@ -1,7 +1,7 @@
 {
   "name": "Paribar · পরিবার",
   "short_name": "Paribar",
-  "description": "Offline family tree and contact book that knows what you call everyone, in 18 heritages",
+  "description": "See how your whole family, and the friends who are family too, is connected. Offline, in 18 heritages",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
