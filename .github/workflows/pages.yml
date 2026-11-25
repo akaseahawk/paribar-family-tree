@@ -1,0 +1,54 @@
+# Builds the public site and publishes it to GitHub Pages on every push to main.
+#   /            landing page (site/index.html)
+#   /app/        the app itself (offline PWA)
+#   /download/   the single-file version (built by build-standalone.py)
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# least privilege: the build job can only read; only the deploy job can publish
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Assemble the site
+        run: |
+          set -euo pipefail
+          python3 build-standalone.py
+          mkdir -p _site/app/schema _site/download
+          cp site/index.html _site/index.html
+          cp -r index.html sw.js manifest.webmanifest css js vendor icons _site/app/
+          cp schema/paribar-template.csv schema/paribar-backup.schema.json _site/app/schema/
+          cp dist/paribar-standalone.html _site/download/paribar-standalone.html
+          find _site -maxdepth 2 | sort
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v5

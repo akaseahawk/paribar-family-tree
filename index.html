@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Paribar · পরিবার — family map</title>
+  <meta name="description" content="Offline family tree and contact book with Bengali kinship terms." />
+  <meta name="theme-color" content="#FBF6EE" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600&family=Tiro+Bangla&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css?v=209" />
+</head>
+<body>
+  <!-- ===== Header: accent border + heritage motif strip (themes.js) ===== -->
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-bn" lang="bn">পরিবার</span>
+      <span class="brand-en">Paribar</span>
+    </div>
+    <div class="header-picks">
+      <label class="view-as" title="See everyone's terms in another heritage's words. Your saved data doesn't change.">
+        <span class="view-as-label">Language</span>
+        <select id="viewAs" aria-label="Language for family terms"></select>
+      </label>
+      <label class="theme-pick" title="Accent color and motif. Side colors stay the same in every theme.">
+        <span class="view-as-label">Theme</span>
+        <select id="themePick" aria-label="Color and motif theme"></select>
+      </label>
+    </div>
+    <div class="header-meta" id="headerMeta"></div>
+    <div class="motif-strip" aria-hidden="true"></div>
+  </header>
+
+  <main id="main">
+    <!-- ===== First run: who are you? ===== -->
+    <section class="view" id="view-setup" hidden>
+      <div class="setup-card">
+        <h1 class="display">Start with you</h1>
+        <p class="lede">Everyone else gets placed relative to you, so the app can work out what you call them: Mashi, 姨媽, Tía, Bua, Imo … in your family's own words.</p>
+        <div class="start-ways">
+          <button class="btn primary block" type="button" id="setupAi">Start with an AI chat (easiest)</button>
+          <button class="btn ghost block" type="button" id="setupDemo">Try the sample family first</button>
+        </div>
+        <form id="setupForm" class="form">
+          <label class="field"><span>Your name</span>
+            <input name="name" required autocomplete="name" placeholder="e.g. Ishaan Mukherjee" /></label>
+          <label class="field"><span>Date of birth (optional, helps with Dada / Bhai)</span>
+            <input name="dob" placeholder="MM/DD/YYYY, or just the year" autocomplete="bday" /></label>
+          <fieldset class="field"><legend>Gender</legend>
+            <div class="seg">
+              <label><input type="radio" name="gender" value="m" checked /> <span>Male</span></label>
+              <label><input type="radio" name="gender" value="f" /> <span>Female</span></label>
+            </div>
+          </fieldset>
+          <fieldset class="field heritage-pick"><legend>Your family's heritage</legend>
+            <p class="hint">This picks the words for each relative. Mixed is fine: choose a different one for each side. You can change it later in Settings.</p>
+            <label class="field"><span>Father's side</span><select name="hPaternal" data-cultures></select></label>
+            <label class="field"><span>Mother's side</span><select name="hMaternal" data-cultures></select></label>
+            <label class="field"><span>Your own (brothers, sisters, your kids)</span><select name="hMe" data-cultures="same"></select></label>
+          </fieldset>
+          <button class="btn primary block" type="submit">Create my tree</button>
+          <button class="btn ghost block" type="button" id="setupImport">I have a backup or spreadsheet — import it</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ===== People list ===== -->
+    <section class="view" id="view-people" hidden>
+      <div class="demo-banner" id="demoBanner" hidden>
+        <span>You're exploring the <b>sample family</b>. Nothing here is real.</span>
+        <button class="btn small primary" id="demoLeave" type="button">Start my own family</button>
+      </div>
+      <div class="seg seg-mini panes" id="peoplePanes" role="tablist" aria-label="People sections">
+        <button class="is-on" data-pane="people" type="button">People</button>
+        <button data-pane="visits" type="button">Visits</button>
+        <button data-pane="dates" type="button">Dates</button>
+        <button data-pane="fix" type="button">Needs attention <b class="count" id="fixCount" hidden></b></button>
+      </div>
+      <div id="pane-people">
+      <div class="toolbar">
+        <label class="search">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="search" type="search" placeholder="Search name, city, Mama, মাসি…" aria-label="Search people" />
+        </label>
+        <div class="seg seg-mini" id="groupBy" role="group" aria-label="Group people by">
+          <button class="is-on" data-group="side" type="button">By side</button>
+          <button data-group="generation" type="button">By generation</button>
+          <button data-group="family" type="button">By family</button>
+        </div>
+        <div class="chips" role="tablist" aria-label="Filter by side">
+          <button class="chip is-on" data-side="all">All</button>
+          <button class="chip" data-side="maternal"><i class="dot maternal"></i><span data-side-name="maternal">Ma's side</span></button>
+          <button class="chip" data-side="paternal"><i class="dot paternal"></i><span data-side-name="paternal">Baba's side</span></button>
+          <button class="chip" data-side="inlaw"><i class="dot inlaw"></i>In-laws</button>
+          <button class="chip" data-side="friend"><i class="dot friend"></i>Friends</button>
+          <button class="chip" data-side="unlinked"><i class="dot unlinked"></i>Unlinked</button>
+          <button class="chip" data-side="dupes">Duplicates <b class="count" id="dupCount" hidden></b></button>
+        </div>
+        <div class="people-filters">
+          <label class="small-select">Relation
+            <select id="relFilter" aria-label="Show only one kind of relative"></select>
+          </label>
+          <button class="btn small" id="peopleReset" type="button" title="Back to: everyone, by side, no search">Reset filters</button>
+        </div>
+      </div>
+      <ul class="people-list" id="peopleList"></ul>
+      </div>
+      <div id="pane-visits" hidden></div>
+      <div id="pane-dates" hidden></div>
+      <div id="pane-fix" hidden></div>
+    </section>
+
+    <!-- ===== Mind map ===== -->
+    <section class="view view-map" id="view-map" hidden>
+      <!-- legend doubles as highlight buttons: tap one to light those people up, tap again to clear -->
+      <div class="map-legend" id="mapLegend" role="group" aria-label="Highlight on the map">
+        <button type="button" data-hi="side:maternal"><i class="dot maternal"></i><span data-side-name="maternal">Ma's side</span></button>
+        <button type="button" data-hi="side:paternal"><i class="dot paternal"></i><span data-side-name="paternal">Baba's side</span></button>
+        <button type="button" data-hi="side:inlaw"><i class="dot inlaw"></i>In-laws</button>
+        <button type="button" data-hi="side:close"><i class="dot close"></i>Siblings / kids</button>
+        <button type="button" data-hi="side:friend"><i class="dot friend"></i>Friends</button>
+        <button type="button" data-hi="married"><svg class="ic rings-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="12" r="5.5"/><circle cx="15" cy="12" r="5.5"/></svg>Married</button>
+        <button type="button" data-hi="late"><i class="late-dot"></i>Late (dashed ring)</button>
+        <label class="small-select hi-select">Highlight
+          <select id="mapHi" aria-label="Highlight a group of relatives"></select>
+        </label>
+        <button class="btn small clear-hi" id="mapClearPath" type="button" hidden>Clear highlight</button>
+        <button class="btn small clear-hi" id="mapOnlyPath" type="button" hidden>Only the path</button>
+      </div>
+      <div class="map-find">
+        <label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input id="mapFind" type="search" placeholder="Find on map…" aria-label="Find a person on the map" autocomplete="off" /></label>
+        <ul class="map-find-list" id="mapFindList" hidden></ul>
+        <label class="small-select layer-select">Show
+          <select id="mapLayer" aria-label="Which layer to show"><option value="all">All</option><option value="family">Family</option><option value="friends">Friends</option></select>
+        </label>
+        <button class="icon-btn" id="mapPicture" type="button" aria-label="Save map as a picture" title="Save as picture / print"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><circle cx="9" cy="10.5" r="1.8"/><path d="m4.5 17 5-4.5 3.5 3 2.5-2 4 3.5"/></svg></button>
+      </div>
+      <div class="map-canvas" id="mapCanvas"></div>
+      <div class="map-card" id="mapCard" hidden></div>
+      <div class="map-tools">
+        <div class="seg seg-mini" id="mapMode" role="group" aria-label="Map style">
+          <button class="is-on" data-mode="mind" type="button">Separation</button>
+          <button data-mode="gen" type="button">Generations</button>
+        </div>
+        <label class="small-select">Degrees
+          <select id="mapDepth" aria-label="Degrees of separation to show"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option value="99" selected>All</option></select>
+        </label>
+        <button class="btn small" id="mapMe" type="button">Me</button>
+        <button class="btn small" id="mapFit" type="button" title="Zoom out to see everyone">Fit</button>
+        <button class="btn small" id="mapReset" type="button" title="Back to: centered on me, everyone shown, no highlight">Reset</button>
+      </div>
+    </section>
+
+    <!-- ===== Add / edit person ===== -->
+    <section class="view" id="view-add" hidden>
+      <form id="personForm" class="form" novalidate>
+        <h2 class="display" id="formTitle">Add someone</h2>
+
+        <!-- How are they related? (hidden when editing) -->
+        <div id="relateBlock" class="panel">
+          <div class="seg seg-tabs" role="tablist">
+            <label><input type="radio" name="mode" value="preset" checked /> <span>Quick pick</span></label>
+            <label><input type="radio" name="mode" value="relative" /> <span>Relative of…</span></label>
+            <label><input type="radio" name="mode" value="none" /> <span>Not sure yet</span></label>
+          </div>
+          <div data-mode="preset">
+            <label class="field"><span>They are my…</span>
+              <select name="preset" id="presetSelect"></select></label>
+          </div>
+          <div data-mode="relative" hidden>
+            <div class="row2">
+              <label class="field"><span>They are the…</span>
+                <select name="relation" id="relationSelect">
+                  <option value="mother">Mother</option><option value="father">Father</option>
+                  <option value="sister">Sister</option><option value="brother">Brother</option>
+                  <option value="daughter">Daughter</option><option value="son">Son</option>
+                  <option value="wife">Wife</option><option value="husband">Husband</option>
+                  <optgroup label="Friends &amp; circles"><option value="friend">Friend</option><option value="colleague">Colleague</option><option value="neighbor">Neighbor</option><option value="classmate">Classmate</option></optgroup>
+                </select></label>
+              <label class="field"><span>…of</span>
+                <select name="anchor" id="anchorSelect"></select></label>
+            </div>
+            <label class="check" id="alsoLinkRow" hidden><input type="checkbox" name="alsoLink" checked /> <span id="alsoLinkText"></span></label>
+          </div>
+          <p class="preview" id="relPreview" aria-live="polite"></p>
+        </div>
+
+        <!-- Fill the form from a contact someone shared with you -->
+        <div class="panel fill-contact" id="fillContact">
+          <h3>Fill from a contact</h3>
+          <div class="fc-btns">
+            <button type="button" class="btn small" id="fcPasteBtn">Paste text</button>
+            <label class="btn small"><input type="file" accept=".vcf,text/vcard,text/x-vcard,text/directory" id="fcFile" hidden />Contact file (.vcf)</label>
+            <button type="button" class="btn small" id="fcPick" hidden>From phone contacts</button>
+          </div>
+          <div id="fcPasteBox" class="fc-paste" hidden>
+            <textarea id="fcText" rows="4" placeholder="Paste a shared contact — name, number, email, address. A whole vCard works too."></textarea>
+            <button type="button" class="btn small primary" id="fcApply">Fill the form</button>
+          </div>
+        </div>
+
+        <label class="field"><span>Name</span>
+          <div class="with-mic"><input name="name" required placeholder="Full name" /><button type="button" class="mic" data-target="name" aria-label="Speak name"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></button></div></label>
+        <div class="row2">
+          <label class="field"><span>Nickname / dak naam</span>
+            <input name="nickname" placeholder="e.g. Bubai, Ritu, Ah Ming" /></label>
+          <label class="field"><span>Date of birth</span>
+            <input name="dob" placeholder="MM/DD/YYYY or year" /></label>
+        </div>
+        <label class="field"><span>The term you use for them (optional — overrides the app's term)</span>
+          <input name="calledTerm" placeholder="e.g. Pishe Dadu, Gu Ze, Tía Lupe" /></label>
+        <label class="field"><span>Heritage for this person (optional)</span>
+          <select name="heritage" data-cultures="side"></select></label>
+        <label class="field"><span>Term nuance</span>
+          <div class="with-mic area"><textarea name="termNuance" rows="2" placeholder="e.g. Ma's pishi's son, so we call him Mama, not Dada"></textarea><button type="button" class="mic" data-target="termNuance" aria-label="Speak nuance"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></button></div></label>
+        <fieldset class="field" id="genderField"><legend>Gender</legend>
+          <div class="seg">
+            <label><input type="radio" name="gender" value="f" /> <span>Female</span></label>
+            <label><input type="radio" name="gender" value="m" /> <span>Male</span></label>
+            <label><input type="radio" name="gender" value="x" checked /> <span>—</span></label>
+          </div>
+        </fieldset>
+
+        <div class="row2">
+          <label class="field"><span>Phone</span>
+            <input name="phone" type="tel" inputmode="tel" placeholder="+91 98…" /></label>
+          <label class="field"><span>City / para</span>
+            <div class="with-mic"><input name="city" placeholder="e.g. Kolkata, Salt Lake" /><button type="button" class="mic" data-target="city" aria-label="Speak city"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></button></div></label>
+        </div>
+        <label class="check"><input type="checkbox" name="whatsapp" checked /> <span>Same number on WhatsApp</span></label>
+        <div class="row2 late-row">
+          <label class="check"><input type="checkbox" name="deceased" /> <span>Has passed away (স্বর্গীয়)</span></label>
+          <label class="field"><span>When (optional)</span><input name="died" placeholder="Year or date" /></label>
+        </div>
+        <label class="field"><span>Address</span>
+          <div class="with-mic area"><textarea name="address" rows="2" placeholder="e.g. Flat 2B, Green Park Apartments, Salt Lake"></textarea><button type="button" class="mic" data-target="address" aria-label="Speak address"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></button></div></label>
+        <label class="field"><span>Email</span><input name="email" type="email" inputmode="email" placeholder="optional" /></label>
+        <label class="field"><span>Met on</span><input name="metOn" type="date" /></label>
+        <label class="field"><span>Notes (tap the mic and just talk)</span>
+          <div class="with-mic area"><textarea name="notes" rows="3" placeholder="e.g. Runs a sweet shop near Gariahat, has two kids, loves cricket"></textarea><button type="button" class="mic" data-target="notes" aria-label="Speak notes"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5.5 11a6.5 6.5 0 0 0 13 0M12 17.5V21"/></svg></button></div></label>
+
+        <div class="field"><span>Photos</span>
+          <div class="photo-strip" id="photoStrip"></div>
+          <div class="row2">
+            <label class="btn ghost"><input type="file" accept="image/*" capture="environment" id="photoCamera" hidden />Take photo</label>
+            <label class="btn ghost"><input type="file" accept="image/*" multiple id="photoGallery" hidden />From gallery</label>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn primary block" type="submit" id="saveBtn">Save person</button>
+          <button class="btn ghost block" type="button" id="clearFormBtn">Clear form</button>
+          <button class="btn ghost block" type="button" id="cancelBtn">Cancel</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ===== Settings & backup (gear tab) ===== -->
+    <section class="view" id="view-data" hidden>
+      <div class="view-head"><h2 class="display">Settings &amp; backup</h2>
+        <button class="btn small" id="dataReset" type="button" title="Clear the paste box and import report, merge back on">Reset</button></div>
+      <div class="panel stats" id="stats"></div>
+
+      <div class="panel">
+        <h3>Back up</h3>
+        <p class="hint">Your data only lives on this phone. Export often — send the file to yourself on WhatsApp or Google Drive.</p>
+        <div class="btn-col">
+          <button class="btn primary" id="exportShare">Share backup file</button>
+          <button class="btn" id="exportDownload">Download full backup (.json, with photos)</button>
+          <button class="btn" id="exportZip">Download spreadsheet + photos (.zip)</button>
+          <button class="btn" id="exportCsv">Download spreadsheet only (.csv)</button>
+          <button class="btn" id="exportVcf">Export contacts (.vcf) for your phone</button>
+        </div>
+      </div>
+
+      <div class="panel" id="aiPanel">
+        <h3>Fill it in with an AI chat</h3>
+        <p class="hint">Talk it through with ChatGPT, Gemini, Claude or Perplexity, in any language or a mix, with photos of a hand-drawn tree if you like. It gives you back a spreadsheet to import here.</p>
+        <div class="btn-col"><button class="btn primary" id="aiOpen" type="button">How it works + copy the prompt</button></div>
+        <p class="hint">Already have relatives in your phone? Export your contacts as a .vcf file and import it below, or give the file to the AI first to clean up and match to the tree.</p>
+      </div>
+
+      <div class="panel">
+        <h3>Restore</h3>
+        <p class="hint">Takes a Paribar .json backup, any .csv or Excel (.xlsx) spreadsheet, or a .zip with a spreadsheet + photos (list file names in a <b>photo_files</b> column). Only a <b>name</b> column is required — add <b>relation_to_me</b> (e.g. Mama, মাসি, mother's sister) and people get linked automatically.</p>
+        <div class="btn-col">
+          <label class="btn"><input type="file" accept=".json,.csv,.xlsx,.xls,.zip,.vcf,application/json,text/csv,text/plain,application/zip,text/vcard,text/x-vcard,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" id="importFile" hidden />Import .json, .csv, Excel (.xlsx), .zip or contacts (.vcf)</label>
+          <button class="btn ghost" id="csvTemplate">Download a blank spreadsheet template</button>
+          <label class="check"><input type="checkbox" id="importMerge" checked /> <span>Merge with what's here (uncheck to replace)</span></label>
+        </div>
+        <div class="paste-import">
+          <h3>Or paste it in</h3>
+          <div class="seg" role="radiogroup" aria-label="Pasted format">
+            <label><input type="radio" name="pasteFmt" value="auto" checked /> <span>Auto</span></label>
+            <label><input type="radio" name="pasteFmt" value="csv" /> <span>CSV</span></label>
+            <label><input type="radio" name="pasteFmt" value="json" /> <span>JSON</span></label>
+            <label><input type="radio" name="pasteFmt" value="contact" /> <span>Contact</span></label>
+          </div>
+          <textarea id="pasteImport" rows="7" spellcheck="false" placeholder="Paste spreadsheet rows (with a header row), a Paribar JSON backup, a vCard, or plain contact details. For several contacts, leave a blank line between each."></textarea>
+          <p class="hint" id="pasteDetect" aria-live="polite"></p>
+          <div class="row2">
+            <button class="btn ghost" id="pasteClear" type="button">Clear</button>
+            <button class="btn primary" id="pasteGo" type="button">Import pasted text</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel" id="importReport" hidden></div>
+
+      <div class="panel" id="heritagePanel">
+        <h3>Heritage &amp; terms</h3>
+        <p class="hint">Just want to look at the tree in another language? Use the <b>Language</b> menu at the top of the screen instead. It doesn't change anything saved here.</p>
+        <p class="hint">Which culture's words to use for each side of the family. A person can have their own too (edit them › Heritage). When sides differ, cards also show the other side's word.</p>
+        <label class="field"><span>Father's side</span><select id="heritPaternal" data-cultures></select></label>
+        <label class="field"><span>Mother's side</span><select id="heritMaternal" data-cultures></select></label>
+        <label class="field"><span>Your own (brothers, sisters, your kids)</span><select id="heritMe" data-cultures></select></label>
+        <label class="field"><span>Your spouse's family</span><select id="heritInlaw" data-cultures></select></label>
+        <p class="hint">These are starter word lists. Families say things differently, so "The term you use for them" on anyone's card always wins.</p>
+      </div>
+
+      <div class="panel">
+        <h3>Settings</h3>
+        <label class="field"><span>Voice language</span>
+          <select id="voiceLang">
+            <option value="en-IN">English (India)</option>
+            <option value="bn-IN">বাংলা (Bengali)</option>
+            <option value="hi-IN">हिन्दी (Hindi)</option>
+            <option value="en-US">English (US)</option>
+            <option value="gu-IN">ગુજરાતી (Gujarati)</option>
+            <option value="pa-IN">ਪੰਜਾਬੀ (Punjabi)</option>
+            <option value="yue-Hant-HK">廣東話 (Cantonese)</option>
+            <option value="zh-CN">普通话 (Mandarin)</option>
+            <option value="ko-KR">한국어 (Korean)</option>
+            <option value="ja-JP">日本語 (Japanese)</option>
+            <option value="vi-VN">Tiếng Việt (Vietnamese)</option>
+            <option value="ar-SA">العربية (Arabic)</option>
+            <option value="yo-NG">Yorùbá (Yoruba)</option>
+            <option value="es-MX">Español (México)</option>
+            <option value="fr-FR">Français (French)</option>
+            <option value="de-DE">Deutsch (German)</option>
+            <option value="ga-IE">Gaeilge (Irish)</option>
+            <option value="it-IT">Italiano (Italian)</option>
+            <option value="sv-SE">Svenska (Swedish)</option>
+          </select></label>
+        <div class="btn-col">
+          <button class="btn" id="persistBtn">Protect storage from cleanup</button>
+          <button class="btn ghost" id="demoBtn">Load sample family (for trying it out)</button>
+          <button class="btn" id="startOverBtn">Start over (back to the first screen)</button>
+          <button class="btn danger" id="wipeBtn">Erase everything on this phone</button>
+        </div>
+      </div>
+      <p class="hint center">Paribar v2.0.9 preview · 18 heritages · data model v2 + visits (JSON + CSV + ZIP)</p>
+    </section>
+  </main>
+
+  <!-- ===== Person detail sheet ===== -->
+  <dialog id="sheet" class="sheet" aria-labelledby="sheetName">
+    <div class="sheet-inner" id="sheetBody"></div>
+  </dialog>
+
+  <!-- ===== Bottom navigation ===== -->
+  <nav class="tabbar" id="tabbar" aria-label="Main">
+    <button data-view="people" class="is-on"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 19c.8-3.2 3.2-5 6-5s5.2 1.8 6 5"/><circle cx="17" cy="9" r="2.4"/><path d="M15.5 14.2c2.6-.4 4.7 1.2 5.5 4.3"/></svg><span>People</span></button>
+    <button data-view="map"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="2.6"/><circle cx="4.5" cy="6" r="1.8"/><circle cx="19.5" cy="6" r="1.8"/><circle cx="5" cy="18.5" r="1.8"/><circle cx="19" cy="18.5" r="1.8"/><path d="M10 10.5 6 7.2M14 10.5l4-3.3M10.1 13.8l-3.6 3.4M13.9 13.8l3.6 3.4"/></svg><span>Map</span></button>
+    <button data-view="add" class="tab-add"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg><span>Add</span></button>
+    <button data-view="data"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Settings</span></button>
+  </nav>
+
+  <dialog id="askDlg" class="ask" aria-labelledby="askMsg">
+    <p id="askMsg"></p>
+    <div class="ask-actions"><button class="btn" id="askCancel">Cancel</button><button class="btn primary" id="askOk">Yes</button></div>
+  </dialog>
+  <dialog id="chooseDlg" class="ask" aria-labelledby="chooseMsg">
+    <p id="chooseMsg"></p>
+    <div class="choose-opts" id="chooseOpts"></div>
+  </dialog>
+  <dialog id="aiDlg" class="sheet" aria-labelledby="aiTitle">
+    <div class="sheet-inner">
+      <div class="sheet-top"><button class="icon-btn" data-act="close" aria-label="Close"><svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+      <h2 class="display" id="aiTitle">Start with an AI chat</h2>
+      <ol class="ai-steps">
+        <li><b>Copy the prompt</b> below. It already has your name and heritage filled in.</li>
+        <li><b>Open your AI chat</b> (ChatGPT, Gemini, Claude, Perplexity …), <b>pick the model yourself</b>, and paste it.</li>
+        <li><b>Talk it through.</b> It will ask a lot of questions instead of guessing. Answer them in any language or a mix. Send photos of a hand-drawn tree if you have one. Say "done" when you're finished. It checks open questions and any placeholders with you before making the file.</li>
+        <li><b>Bring it back:</b> import the CSV file it gives you, or copy its code block into Settings › Or paste it in.</li>
+        <li><b>Finish in the app:</b> add birthdays, take headshots with Take photo, add addresses and phones, then Export contacts (.vcf) to your phone.</li>
+      </ol>
+      <div class="ai-prompt-head"><h3>The prompt</h3><button class="btn primary small" id="aiCopy" type="button">Copy prompt</button></div>
+      <textarea id="aiPromptText" rows="9" readonly spellcheck="false"></textarea>
+      <details class="ai-dict"><summary>What the AI hands back (data dictionary)</summary>
+        <p class="hint">The prompt includes this list, so the AI knows exactly which columns to fill. Empty is fine when something isn't known.</p>
+        <div class="ai-dict-list" id="aiDict"></div></details>
+      <h3>Tips that make the biggest difference</h3>
+      <dl class="ai-tips" id="aiTips"></dl>
+      <div class="btn-col"><button class="btn" id="aiToPaste" type="button">I have the CSV: go to paste box</button></div>
+    </div>
+  </dialog>
+  <dialog id="visitDlg" class="sheet" aria-label="Visit"><div class="sheet-inner"></div></dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <input type="file" accept=".json,.csv,.xlsx,.xls,.zip,.vcf,application/json,text/csv,text/plain,application/zip,text/vcard,text/x-vcard,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" id="setupImportFile" hidden />
+
+  <script src="vendor/d3.min.js?v=209"></script>
+  <script src="vendor/fflate.min.js?v=209"></script>
+  <script src="js/db.js?v=209"></script>
+  <script src="js/themes.js?v=209"></script>
+  <script src="js/cultures.js?v=209"></script>
+  <script src="js/kinship.js?v=209"></script>
+  <script src="js/demo.js?v=209"></script>
+  <script src="js/aiprompt.js?v=209"></script>
+  <script src="js/family.js?v=209"></script>
+  <script src="js/mindmap.js?v=209"></script>
+  <script src="js/io.js?v=209"></script>
+  <script src="js/speak.js?v=209"></script>
+  <script src="js/checks.js?v=209"></script>
+  <script src="js/visits.js?v=209"></script>
+  <script src="js/dates.js?v=209"></script>
+  <script src="js/treeimage.js?v=209"></script>
+  <script src="js/dupes.js?v=209"></script>
+  <script src="js/app.js?v=209"></script>
+</body>
+</html>

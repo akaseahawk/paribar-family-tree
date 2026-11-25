@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Paribar · পরিবার — the family tree that knows what you call everyone</title>
+  <meta name="description" content="A free family tree and contact book for mixed, multilingual families. 18 heritages of family words. Works offline. No account, no server storage." />
+  <meta name="theme-color" content="#FBF6EE" />
+  <link rel="icon" href="app/icons/icon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600&family=Tiro+Bangla&display=swap" rel="stylesheet" />
+  <style>
+    /* Same look as the app: cream paper, red accent, alpana motif strip */
+    :root { --bg: #FBF6EE; --surface: #FFFDF9; --line: #E6D9C6; --ink: #2B1B14; --muted: #6E5D52; --red: #A61E24; --red-ink: #7E1419; --red-soft: #F6E3DF;
+      --maternal: #B3262C; --paternal: #C08417; --inlaw: #3F6E5A; --friend: #2C6E9B;
+      --font-body: 'Hind Siliguri', system-ui, sans-serif; --font-display: 'Tiro Bangla', Georgia, serif;
+      --motif: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='24' viewBox='0 0 40 24'%3E%3Cpath d='M20 4 C26 10 26 16 20 22 C14 16 14 10 20 4Z' fill='none' stroke='%23A61E24' stroke-width='1.4'/%3E%3Ccircle cx='4' cy='13' r='1.6' fill='%23A61E24'/%3E%3Ccircle cx='36' cy='13' r='1.6' fill='%23A61E24'/%3E%3Cpath d='M8 13 Q12 9 16 13 M24 13 Q28 17 32 13' fill='none' stroke='%23A61E24' stroke-width='1'/%3E%3C/svg%3E"); }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--ink); font: 400 17px/1.6 var(--font-body); }
+    a { color: var(--red-ink); }
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 20px; }
+    header { padding: 18px 0 0; }
+    .brand { display: flex; align-items: baseline; gap: .5rem; }
+    .brand b { font: 400 1.7rem/1 var(--font-display); color: var(--red); }
+    .brand span { font-size: .8rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+    .strip { height: 26px; margin-top: 14px; border-top: 2px solid var(--red); border-bottom: 2px solid var(--red); background: var(--motif) repeat-x left center / 40px 24px; }
+    h1 { font: 400 clamp(2rem, 7vw, 3rem)/1.15 var(--font-display); margin: 36px 0 12px; text-wrap: balance; }
+    h2 { font: 400 1.6rem/1.2 var(--font-display); margin: 44px 0 12px; color: var(--red-ink); }
+    .lead { font-size: 1.12rem; color: var(--muted); margin: 0 0 22px; max-width: 36em; }
+    .cta { display: flex; flex-wrap: wrap; gap: 10px; }
+    .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: .6rem 1.2rem; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-weight: 600; text-decoration: none; }
+    .btn.primary { background: var(--red); border-color: var(--red); color: #fff; }
+    .btn:focus-visible { outline: 3px solid var(--red-soft); outline-offset: 2px; }
+    .terms { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 0; padding: 0; list-style: none; }
+    .terms li { padding: 4px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: .95rem; }
+    .terms li small { color: var(--muted); }
+    .steps { counter-reset: s; list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; }
+    .steps li { counter-increment: s; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px 14px 56px; position: relative; }
+    .steps li::before { content: counter(s); position: absolute; left: 14px; top: 14px; width: 30px; height: 30px; border-radius: 50%; background: var(--red); color: #fff; display: grid; place-items: center; font-weight: 600; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 12px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+    .card b { display: block; margin-bottom: 2px; }
+    .card p { margin: 0; color: var(--muted); font-size: .96rem; }
+    .sides { display: flex; flex-wrap: wrap; gap: 14px; margin: 10px 0 0; font-size: .92rem; color: var(--muted); }
+    .sides i { display: inline-block; width: 11px; height: 11px; border-radius: 50%; border: 3px solid; margin-right: 6px; vertical-align: -1px; }
+    .privacy { background: var(--red-soft); border-radius: 14px; padding: 16px 18px; }
+    .privacy p { margin: 0; }
+    footer { margin: 56px 0 0; padding: 22px 0 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: .92rem; }
+    footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap brand"><b lang="bn">পরিবার</b><span>Paribar</span></div>
+    <div class="strip" aria-hidden="true"></div>
+  </header>
+
+  <main class="wrap">
+    <h1>The family tree that knows what you call everyone</h1>
+    <p class="lead">A free family tree and contact book for mixed, multilingual families. Add someone once and Paribar gives you the right word for them, in your family's own language: Mashi, 姨媽, Tía, Bua, Moster and more.</p>
+    <div class="cta">
+      <a class="btn primary" href="app/">Open the app</a>
+      <a class="btn" href="download/paribar-standalone.html" download>Download single file</a>
+      <a class="btn" href="https://github.com/akaseahawk/paribar-family-tree#readme">How it works</a>
+    </div>
+    <ul class="terms" aria-label="Examples of family words">
+      <li lang="bn">মাসি <small>Mashi</small></li>
+      <li lang="zh-HK">姨媽 <small>Ji Maa</small></li>
+      <li lang="es">Tía <small>Spanish</small></li>
+      <li lang="pa">ਭੂਆ <small>Bhua</small></li>
+      <li lang="ko">이모 <small>Imo</small></li>
+      <li lang="sv">Moster <small>Swedish</small></li>
+      <li lang="ar">خالة <small>Khala</small></li>
+    </ul>
+
+    <h2>Start in four steps</h2>
+    <ol class="steps">
+      <li><b>Open the app</b> on your phone. Tap <b>Load sample family</b> to look around first if you like.</li>
+      <li><b>Start with you.</b> Add your name and pick the heritage of each side of your family.</li>
+      <li><b>Add family fast:</b> type them in, import your phone contacts, or copy the built-in AI prompt into ChatGPT, Gemini, Claude or Perplexity, talk it through in any language, and import the file it gives you.</li>
+      <li><b>Install it:</b> use your browser's "Add to Home screen". It works offline after that.</li>
+    </ol>
+
+    <h2>What it does</h2>
+    <div class="grid">
+      <div class="card"><b>18 heritages</b><p>Bengali, Cantonese, Hindi, Punjabi, Gujarati, Mandarin, Japanese, Korean, Vietnamese, Arabic, Yoruba, Spanish, English, French, German, Irish, Italian, Swedish.</p></div>
+      <div class="card"><b>Mixed families</b><p>Each side of the family keeps its own words. Use the Language menu to see everyone in another heritage's words.</p></div>
+      <div class="card"><b>Maps and trails</b><p>See how anyone is related to you, or trace the trail between any two people.</p></div>
+      <div class="card"><b>Contacts and visits</b><p>Phones, WhatsApp, addresses, photos, birthdays, and a log of visits and gifts.</p></div>
+      <div class="card"><b>Themes</b><p>Ten heritage color and motif themes. Side colors never change, so maps keep their meaning.</p></div>
+      <div class="card"><b>Your files</b><p>Back up to JSON, CSV (opens in Excel), ZIP with photos, or contacts (.vcf) for your phone. Imports Excel too.</p></div>
+    </div>
+    <div class="sides" aria-label="Side colors">
+      <span><i style="border-color:var(--maternal)"></i>Mother's side</span>
+      <span><i style="border-color:var(--paternal)"></i>Father's side</span>
+      <span><i style="border-color:var(--inlaw)"></i>In-laws</span>
+      <span><i style="border-color:var(--friend)"></i>Friends</span>
+    </div>
+
+    <h2>Private by design</h2>
+    <div class="privacy"><p>No account and no server storage. Your family stays in your phone's browser and in the backup files you save. Back up now and then, because clearing your browser data erases it. Voice typing uses your browser's speech service, and anything you tell an AI chat goes to that company. <a href="https://github.com/akaseahawk/paribar-family-tree/blob/main/docs/privacy.md">Privacy details</a></p></div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <span>Made by <a href="https://github.com/akaseahawk">akaseahawk</a></span>
+      <a href="https://github.com/akaseahawk/paribar-family-tree">Source on GitHub</a>
+      <a href="https://github.com/akaseahawk/paribar-family-tree/blob/main/docs/ai-prompt.md">The AI prompt</a>
+      <a href="https://github.com/akaseahawk/paribar-family-tree/blob/main/docs/privacy.md">Privacy</a>
+    </div>
+  </footer>
+</body>
+</html>

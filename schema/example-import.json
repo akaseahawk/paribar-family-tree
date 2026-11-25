@@ -1,0 +1,255 @@
+{
+ "app": "paribar",
+ "schemaVersion": 2,
+ "meta": {
+  "meId": "p1",
+  "heritage": {
+   "me": "english",
+   "paternal": "bengali",
+   "maternal": "cantonese",
+   "inlaw": "english"
+  }
+ },
+ "people": [
+  {
+   "id": "p1",
+   "name": "Ishaan Mukherjee",
+   "gender": "m",
+   "dob": "2014-06-21",
+   "birthYear": "2014",
+   "photos": [],
+   "createdAt": "2026-11-24T12:00:00.000Z",
+   "city": "Austin, TX"
+  },
+  {
+   "id": "p4",
+   "name": "Sourav Mukherjee",
+   "gender": "m",
+   "dob": "1982-03-09",
+   "birthYear": "1982",
+   "photos": [],
+   "createdAt": "2026-11-24T12:00:00.000Z",
+   "nickname": "Baba",
+   "city": "Austin, TX",
+   "phone": "+1 512 555 0142",
+   "email": "sourav@example.com"
+  },
+  {
+   "id": "p5",
+   "name": "Grace Wong",
+   "gender": "f",
+   "dob": "1984-11-02",
+   "birthYear": "1984",
+   "photos": [],
+   "createdAt": "2026-11-24T12:00:00.000Z",
+   "nickname": "Mom",
+   "city": "Austin, TX",
+   "phone": "+1 512 555 0143",
+   "notes": "Chinese name 黃嘉欣 (Wong Gaa-jan)."
+  },
+  {
+   "id": "p6",
+   "name": "Prasanta Mukherjee",
+   "gender": "m",
+   "dob": "",
+   "birthYear": "1951",
+   "photos": [],
+   "createdAt": "2026-11-24T12:00:00.000Z",
+   "city": "Kolkata",
+   "phone": "+91 00000 55501",
+   "notes": "Retired engineer. Tells the best stories about the old para."
+  },
+  {
+   "id": "p7",
+   "name": "Swapna Mukherjee",
+   "gender": "f",
+   "dob": "",
+   "birthYear": "1956",
+   "photos": [],
+   "createdAt": "2026-11-24T12:00:00.000Z",
+   "city": "Kolkata",
+   "notes": "Makes payesh for every birthday."
+  },
+  {
+   "id": "p8",
+   "name": "Rituparna Banerjee",
+   "gender": "f",
+   "dob": "",
+   "birthYear": "1979",
+   "photos": [],
+   "createdAt": "2026-11-24T12:00:00.000Z",
+   "nickname": "Ritu",
+   "city": "Bengaluru",
+   "phone": "+91 00000 55502"
+  },
+  {
+   "id": "p19",
+   "name": "Wong Kwok-wai",
+   "gender": "m",
+   "dob": "",
+   "birthYear": "1954",
+   "photos": [],
+   "createdAt": "2026-11-24T12:00:00.000Z",
+   "city": "Hong Kong",
+   "phone": "+852 0000 0101",
+   "notes": "黃國偉. Morning tai chi in the park, then dim sum."
+  },
+  {
+   "id": "p20",
+   "name": "Lee Mei-ling",
+   "gender": "f",
+   "dob": "",
+   "birthYear": "1957",
+   "photos": [],
+   "createdAt": "2026-11-24T12:00:00.000Z",
+   "city": "Hong Kong",
+   "notes": "李美玲."
+  },
+  {
+   "id": "p21",
+   "name": "Vivian Leung",
+   "gender": "f",
+   "dob": "",
+   "birthYear": "1980",
+   "photos": [],
+   "createdAt": "2026-11-24T12:00:00.000Z",
+   "city": "Vancouver",
+   "phone": "+1 604 555 0144"
+  },
+  {
+   "id": "p22",
+   "name": "Kenneth Leung",
+   "gender": "m",
+   "dob": "",
+   "birthYear": "1978",
+   "photos": [],
+   "createdAt": "2026-11-24T12:00:00.000Z",
+   "city": "Vancouver"
+  },
+  {
+   "id": "p23",
+   "name": "Ethan Leung",
+   "gender": "m",
+   "dob": "",
+   "birthYear": "2009",
+   "photos": [],
+   "createdAt": "2026-11-24T12:00:00.000Z",
+   "city": "Vancouver"
+  }
+ ],
+ "relationships": [
+  {
+   "id": "p33",
+   "type": "parent_of",
+   "from": "p5",
+   "to": "p1",
+   "createdAt": "2026-11-24T12:00:00.000Z"
+  },
+  {
+   "id": "p34",
+   "type": "parent_of",
+   "from": "p4",
+   "to": "p1",
+   "createdAt": "2026-11-24T12:00:00.000Z"
+  },
+  {
+   "id": "p39",
+   "type": "parent_of",
+   "from": "p7",
+   "to": "p4",
+   "createdAt": "2026-11-24T12:00:00.000Z"
+  },
+  {
+   "id": "p40",
+   "type": "parent_of",
+   "from": "p6",
+   "to": "p4",
+   "createdAt": "2026-11-24T12:00:00.000Z"
+  },
+  {
+   "id": "p41",
+   "type": "parent_of",
+   "from": "p7",
+   "to": "p8",
+   "createdAt": "2026-11-24T12:00:00.000Z"
+  },
+  {
+   "id": "p42",
+   "type": "parent_of",
+   "from": "p6",
+   "to": "p8",
+   "createdAt": "2026-11-24T12:00:00.000Z"
+  },
+  {
+   "id": "p55",
+   "type": "parent_of",
+   "from": "p20",
+   "to": "p5",
+   "createdAt": "2026-11-24T12:00:00.000Z"
+  },
+  {
+   "id": "p56",
+   "type": "parent_of",
+   "from": "p19",
+   "to": "p5",
+   "createdAt": "2026-11-24T12:00:00.000Z"
+  },
+  {
+   "id": "p57",
+   "type": "parent_of",
+   "from": "p20",
+   "to": "p21",
+   "createdAt": "2026-11-24T12:00:00.000Z"
+  },
+  {
+   "id": "p58",
+   "type": "parent_of",
+   "from": "p19",
+   "to": "p21",
+   "createdAt": "2026-11-24T12:00:00.000Z"
+  },
+  {
+   "id": "p61",
+   "type": "parent_of",
+   "from": "p21",
+   "to": "p23",
+   "createdAt": "2026-11-24T12:00:00.000Z"
+  },
+  {
+   "id": "p62",
+   "type": "parent_of",
+   "from": "p22",
+   "to": "p23",
+   "createdAt": "2026-11-24T12:00:00.000Z"
+  },
+  {
+   "id": "p71",
+   "type": "spouse_of",
+   "from": "p5",
+   "to": "p4",
+   "createdAt": "2026-11-24T12:00:00.000Z"
+  },
+  {
+   "id": "p72",
+   "type": "spouse_of",
+   "from": "p7",
+   "to": "p6",
+   "createdAt": "2026-11-24T12:00:00.000Z"
+  },
+  {
+   "id": "p76",
+   "type": "spouse_of",
+   "from": "p20",
+   "to": "p19",
+   "createdAt": "2026-11-24T12:00:00.000Z"
+  },
+  {
+   "id": "p77",
+   "type": "spouse_of",
+   "from": "p21",
+   "to": "p22",
+   "createdAt": "2026-11-24T12:00:00.000Z"
+  }
+ ],
+ "visits": []
+}
