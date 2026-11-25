@@ -38,6 +38,8 @@ flowchart TD
   X --> F["Paribar draws the<br/>tree and circles"]
 ```
 
+![A hand-drawn family tree in blue pen with the sample family's made-up names](docs/images/paper-drawing.jpg)
+
 - We drew the family out on paper and snapped a photo, then put a phone in the middle of the room and just talked.
 - An AI read the drawing and the conversation and turned them into data. I imported that, and Paribar built the tree and the circles. The AI only saves the typing; you can always add people by hand.
 - The family words fill in a lot on their own: a Mashi is your mother's sister, a Jethu your father's older brother.
@@ -51,7 +53,7 @@ With the holidays here and families getting together, I hope you get to have the
 | ![Family circles map of the sample family, rings around Ishaan, friends on dashed blue lines](docs/images/map-circles.png) | ![Generations tree of the sample family, one column per generation, friends in their own band](docs/images/map-generations.png) |
 | You're in the middle; each ring is one more step away. | One column per generation, couples side by side, friends in their own band. |
 
-<img src="docs/images/people.png" width="360" alt="The People tab with the sample family grouped by side" />
+<img src="docs/images/people.png" width="360" alt="The People tab with the sample family in Cantonese: Kai shows as 細佬 Sai Lou, little brother" />
 
 **Friends can be family too.** Add the neighbor who's practically an uncle, Mom's best friend the kids call Auntie, a colleague or a classmate. They appear on both maps, linked through whoever they know, and their families can join too.
 
