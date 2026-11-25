@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Paribar · পরিবার — see how everyone is connected</title>
-  <meta name="description" content="Map your whole family, and the friends who are family too, on a Generations tree and in Family circles. Draw it on paper, snap a photo, and keep it forever. 18 heritages. Works offline. No account." />
+  <meta name="description" content="Map your whole family, and the friends who are family too, on a Generations tree and in Family circles. Draw it on paper, snap a photo, and keep it forever. 24 heritages. Works offline. No account." />
   <meta name="theme-color" content="#FBF6EE" />
   <link rel="icon" href="app/icons/icon.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -49,6 +49,7 @@
     .shot img { display: block; width: 100%; height: auto; max-height: 560px; object-fit: cover; object-position: top; border-radius: 10px; border: 1px solid var(--line); }
     .shot figcaption { margin-top: 10px; color: var(--muted); font-size: .96rem; }
     .shot figcaption b { display: block; color: var(--ink); }
+    .people-shot { max-width: 420px; margin: 0 auto 14px; }
     .body { margin: 0; max-width: 38em; }
     .story { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--red); border-radius: 14px; padding: 6px 18px; }
     .story p { margin: 12px 0; }
@@ -86,10 +87,10 @@
 
     <h2>Why I built this</h2>
     <div class="story">
-      <p>I went back to India after 20 years knowing only two relatives, both very elderly, and just their names and phone numbers. That was it. I built Paribar so that the next time I visit, years from now, I can reach out to everyone directly and keep in touch.</p>
-      <p>For a month I traveled to different homes, in different parts of the family. At each one we drew the family out in chicken scratch on paper and snapped a photo, and the AI read the drawing and turned it into data. Then we put a phone in the middle of the room and just talked, in a mix of Hindi, Bengali and English, while the AI listened, transcribed it all and turned that into data too. I imported it into Paribar, and Paribar drew the tree. It even filled in what nobody says out loud because the family words already carry it: a Mashi is your mother's sister, a Jethu your father's older brother.</p>
-      <p>At every stop I showed everyone how they were all connected, on the family tree and in the circles. My little nieces and nephews got so excited about it. We imported phone contacts and took pictures of everyone, great-grandparents included.</p>
+      <p>I went back to India after 20 years knowing only two relatives, both very elderly, and just their names and phone numbers. So I built Paribar (family in Bengali), an app that shows how everyone is connected and keeps their details in one place, so that next time I can reach out to everyone directly and keep in touch.</p>
+      <p>Then for a few weeks I went home to home, across the family and close friends. At every stop I showed everyone how they were all connected, on the family tree and in the circles, and my little nieces and nephews loved it. We added phone numbers and took pictures of everyone, great-grandparents included.</p>
       <p>The best part was the conversations. Mapping it all out brought up stories that never come up otherwise, like the wild thing a distant uncle once did. He's on the map now.</p>
+      <p>How the family got in: we drew it out in chicken scratch on paper and snapped a photo, then put a phone in the middle of the room and just talked, in Hindi, Bengali and English all mixed together. An AI read the drawing and the conversation and turned them into data, I imported that into Paribar, and Paribar drew the tree. The family words fill in a lot on their own: a Mashi is your mother's sister, a Jethu your father's older brother.</p>
       <p>We live in a data-rich world, but family history still lives in what people remember, on scraps of paper, or in a photo of an ancestor on the wall. Paribar makes it digital, so you can share it with your kids and keep it, in theory, forever.</p>
       <p class="sign">With the holidays here and families getting together, I hope you get to have these conversations too.<br/>— <a href="https://github.com/akaseahawk">akaseahawk</a></p>
     </div>
@@ -120,6 +121,10 @@
 
     <h2>Stay in touch</h2>
     <p class="body">Paribar keeps everyone's details in one place, and one tap does the rest:</p>
+    <figure class="card shot people-shot">
+      <a href="images/people.png"><img src="images/people.png" width="1000" height="1153" loading="lazy" alt="The People tab with the sample family, grouped by side, with Language and Theme menus at the top" /></a>
+      <figcaption><b>Everyone in one place</b>Group by side, generation or family, search in any language, and tap a name for a bigger photo, Call, Text, Email or Map.</figcaption>
+    </figure>
     <div class="grid">
       <div class="card"><b>Happy birthday</b><p>The Dates tab lists upcoming birthdays and anniversaries. Send wishes opens WhatsApp with a message in their family's language, ready to send.</p></div>
       <div class="card"><b>Call to check in</b><p>Tap Call or Chat on anyone's card.</p></div>
@@ -140,7 +145,7 @@
       <div class="card"><b>Generations tree and Family circles</b><p>The whole family, and friends, on two maps. Zoom, find anyone, highlight a side, and save a picture to share.</p></div>
       <div class="card"><b>Trails between people</b><p>Pick any two people and see exactly how they're related, step by step.</p></div>
       <div class="card"><b>Friends who are family</b><p>Friends, neighbors, colleagues and classmates, with their own families, right on the map.</p></div>
-      <div class="card"><b>18 heritages</b><p>Bengali, Cantonese, Hindi, Punjabi, Gujarati, Mandarin, Japanese, Korean, Vietnamese, Arabic, Yoruba, Spanish, English, French, German, Irish, Italian, Swedish.</p></div>
+      <div class="card"><b>24 heritages</b><p>Bengali, Hindi, Punjabi, Gujarati, Cantonese, Mandarin, Japanese, Korean, Vietnamese, Arabic, Ghanaian (Akan: Twi, Asante, Fante), Nigerian (Yoruba), Spanish (Mexico &amp; Latin America, Puerto Rico &amp; Dominican Republic, Argentina &amp; Uruguay), Haitian Creole, Jamaican Patois, English, French, German, Irish, Italian, Romanian, Swedish. Don't see yours? <a href="https://github.com/akaseahawk/paribar-family-tree/issues/new?title=Heritage%20request:%20">Let me know</a> and I'll add it.</p></div>
       <div class="card"><b>Mixed families</b><p>Each side of the family keeps its own words. Use the Language menu to see everyone in another heritage's words.</p></div>
       <div class="card"><b>Contacts and visits</b><p>Phones, WhatsApp, addresses, photos, birthdays, and a log of visits and gifts. Text, call or open a map in one tap.</p></div>
       <div class="card"><b>Themes</b><p>Ten heritage color and motif themes. Side colors never change, so maps keep their meaning.</p></div>

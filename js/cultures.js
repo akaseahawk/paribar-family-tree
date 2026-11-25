@@ -345,8 +345,8 @@ FT.cultures = (() => {
   greatGrand(T, (a, b, g) => (a === 'father' && b === 'father' ? (g === 'm' ? ['Zēngzǔfù', '曾祖父'] : ['Zēngzǔmǔ', '曾祖母']) : (g === 'm' ? ['Wài zēngzǔfù', '外曾祖父'] : ['Wài zēngzǔmǔ', '外曾祖母'])));
   return T; })() });
 
-  // Mexican / Latino Spanish — generic engine (tío, prima segunda, cuñado …)
-  add({ id: 'spanish', name: 'Mexican / Latino Spanish', native: 'Español', lang: 'es-MX', wish: '¡Feliz cumpleaños!', latin: true, T: {
+  // Spanish (Mexico & Latin America) — generic engine (tío, prima segunda, cuñado …)
+  add({ id: 'spanish', name: 'Spanish (Mexico & Latin America)', native: 'Español', lang: 'es-MX', wish: '¡Feliz cumpleaños!', latin: true, T: {
     'husband.brother.wife': ['Concuña'], 'wife.sister.husband': ['Concuño'], 'wife.brother.wife': ['Concuña'], 'husband.sister.husband': ['Concuño'],
   }, generic: (w, c) => spanishTerm(w, c) });
 
@@ -453,6 +453,66 @@ FT.cultures = (() => {
     'son.son': P('Sonson'), 'son.daughter': P('Sondotter'), 'daughter.son': P('Dotterson'), 'daughter.daughter': P('Dotterdotter') });
   add({ id: 'swedish', name: 'Swedish', native: 'Svenska', lang: 'sv-SE', wish: 'Grattis på födelsedagen', latin: true, T: svT, generic: (w, c) => euroTerm(SV, w, c) });
 
+  // Spanish (Puerto Rico & Dominican Republic) — same engine as Spanish, plus Titi for aunts and Mami / Papi
+  // Sources: SpanishDict "tití" (Puerto Rico: auntie); Wiktionary "tití" (Puerto Rico: aunt)
+  add({ id: 'spanish_pr', name: 'Spanish (Puerto Rico & Dominican Republic)', native: 'Español boricua', lang: 'es-PR', langAlt: ['es-US', 'es-MX'], wish: '¡Feliz cumpleaños!', latin: true, T: {
+    father: ['Papi'], mother: ['Mami'],
+    'father.sister': ['Titi'], 'mother.sister': ['Titi'], 'father.brother.wife': ['Titi'], 'mother.brother.wife': ['Titi'],
+    'husband.brother.wife': ['Concuña'], 'wife.sister.husband': ['Concuño'], 'wife.brother.wife': ['Concuña'], 'husband.sister.husband': ['Concuño'],
+  }, generic: (w, c) => spanishTerm(w, c) });
+
+  // Spanish (Argentina & Uruguay) — grandparents are Nono / Nona (from Italian, Diccionario de americanismos)
+  add({ id: 'spanish_ar', name: 'Spanish (Argentina & Uruguay)', native: 'Español rioplatense', lang: 'es-AR', langAlt: ['es-UY', 'es-ES'], wish: '¡Feliz cumpleaños!', latin: true, T: {
+    'father.father': ['Nono'], 'father.mother': ['Nona'], 'mother.father': ['Nono'], 'mother.mother': ['Nona'],
+  }, generic: (w, c) => spanishTerm(w, c) });
+
+  // Haitian Creole — tonton, matant, kouzen / kouzin, bòpè, bèlmè …
+  const HT = { spouse: ['Mari', 'Madanm'], anc: [, ['Papa', 'Manman'], ['Granpè', 'Grann'], ['Bon gran papa', 'Gran grann']],
+    des: [, ['Pitit gason', 'Pitit fi'], ['Pitit pitit gason', 'Pitit pitit fi']], sib: ['Frè', 'Sè'],
+    elder: (t, e, g) => (g === 'f' ? (e ? 'Gran sè' : 'Ti sè') : (e ? 'Gran frè' : 'Ti frè')),
+    uncle: [, , ['Tonton', 'Matant']], nephew: [, , ['Neve', 'Nyès']], cousin: [, , ['Kouzen', 'Kouzin']],
+    pil: ['Bòpè', 'Bèlmè'], sil: ['Bòfrè', 'Bèlsè'], cil: ['Bofis', 'Bèlfi'] };
+  add({ id: 'haitian', name: 'Haitian Creole', native: 'Kreyòl ayisyen', lang: 'ht', langAlt: ['fr-FR'], wish: 'Bòn fèt!', latin: true, T: {}, generic: (w, c) => euroTerm(HT, w, c) });
+
+  // Jamaican Patois — Madda, Faada, Bredda, Sista, Granny, Auntie; in-laws stay in English
+  const JM = { spouse: ['Husban', 'Wife'], anc: [, ['Faada', 'Madda'], ['Granfaada', 'Granny'], ['Great-granfaada', 'Great-granny']],
+    des: [, ['Son', 'Dawta'], ['Gran pickney', 'Gran pickney']], sib: ['Bredda', 'Sista'],
+    uncle: [, , ['Uncle', 'Auntie']], nephew: [, , ['Nephew', 'Niece']], cousin: [, , ['Cousin', 'Cousin']],
+    pil: ['Faada-in-law', 'Madda-in-law'], sil: ['Bredda-in-law', 'Sista-in-law'], cil: ['Son-in-law', 'Dawta-in-law'] };
+  add({ id: 'jamaican', name: 'Jamaican Patois', native: 'Patwa', lang: 'en-JM', langAlt: ['en-GB', 'en-US'], wish: 'Happy birthday!', latin: true, T: {}, generic: (w, c) => euroTerm(JM, w, c) });
+
+  // Ghanaian (Akan: Twi, Asante, Fante) — matrilineal: mother's brother is Wɔfa, father's sister Sewaa,
+  // mother's sister is another Maame and father's brother another Papa, so their children are siblings (Onua)
+  add({ id: 'akan', name: 'Ghanaian (Akan: Twi, Asante, Fante)', native: 'Akan', lang: 'ak', langAlt: ['tw', 'en-GB'], wish: 'Mema wo awoda pa', latin: true, T: (() => { const T = {
+    father: 'Papa', mother: 'Maame', son: 'Ɔba barima', daughter: 'Ɔba baa', husband: 'Okunu', wife: 'Ɔyere',
+    brother: (c) => ey(c.elderThanMe(1), 'Onua panin', 'Onua kumaa'), sister: (c) => ey(c.elderThanMe(1), 'Onuabaa panin', 'Onuabaa kumaa'),
+    'father.brother': (c) => ey(c.elder(2, 1), 'Papa panin', 'Papa kumaa'), 'father.sister': 'Sewaa',
+    'mother.brother': 'Wɔfa', 'mother.sister': (c) => ey(c.elder(2, 1), 'Maame panin', 'Maame kumaa'),
+    'father.brother.son': 'Onua', 'father.brother.daughter': 'Onuabaa', 'mother.sister.son': 'Onua', 'mother.sister.daughter': 'Onuabaa',
+    'mother.brother.son': 'Wɔfa ba', 'mother.brother.daughter': 'Wɔfa ba', 'father.sister.son': 'Sewaa ba', 'father.sister.daughter': 'Sewaa ba',
+    'wife.father': 'Asebarima', 'husband.father': 'Asebarima', 'wife.mother': 'Asebaa', 'husband.mother': 'Asebaa',
+    'wife.brother': 'Akonta', 'husband.brother': 'Akonta', 'sister.husband': 'Akonta',
+    'wife.sister': 'Akumaa', 'husband.sister': 'Akumaa', 'brother.wife': 'Akumaa',
+    'son.wife': 'Ase', 'daughter.husband': 'Ase',
+  };
+  ['father', 'mother'].forEach((s) => { T[`${s}.father`] = 'Nana barima'; T[`${s}.mother`] = 'Nana baa'; });
+  ['brother', 'sister'].forEach((x) => { T[`${x}.son`] = 'Wɔfaase'; T[`${x}.daughter`] = 'Wɔfaasewa'; });
+  ['son', 'daughter'].forEach((x) => (T[`${x}.son`] = T[`${x}.daughter`] = 'Nana'));
+  greatGrand(T, (a, b, g) => (g === 'm' ? 'Nanabarima prenu' : 'Nanabaa prenu'));
+  Object.keys(T).forEach((k) => { if (typeof T[k] === 'string') T[k] = P(T[k]); else if (typeof T[k] === 'function') { const f = T[k]; T[k] = (c) => P(f(c)); } });
+  return T; })() });
+
+  // Romanian — nepot covers grandson and nephew; cuscru / cuscră are your child's parents-in-law
+  const RO = { spouse: ['Soț', 'Soție'], anc: [, ['Tata', 'Mama'], ['Bunic', 'Bunică'], ['Străbunic', 'Străbunică'], ['Răsbunic', 'Răsbunică']],
+    des: [, ['Fiu', 'Fiică'], ['Nepot', 'Nepoată'], ['Strănepot', 'Strănepoată']], sib: ['Frate', 'Soră'],
+    elder: (t, e, g) => `${t} mai ${e ? 'mare' : g === 'f' ? 'mică' : 'mic'}`,
+    uncle: [, , ['Unchi', 'Mătușă']], nephew: [, , ['Nepot', 'Nepoată'], ['Strănepot', 'Strănepoată']],
+    cousin: [, , ['Văr', 'Verișoară'], ['Văr de-al doilea', 'Verișoară de-a doua']],
+    pil: ['Socru', 'Soacră'], sil: ['Cumnat', 'Cumnată'], cil: ['Ginere', 'Noră'] };
+  const roT = {};
+  ['son.wife', 'daughter.husband'].forEach((k) => { roT[`${k}.father`] = P('Cuscru'); roT[`${k}.mother`] = P('Cuscră'); });
+  add({ id: 'romanian', name: 'Romanian', native: 'Română', lang: 'ro-RO', wish: 'La mulți ani!', latin: true, T: roT, generic: (w, c) => euroTerm(RO, w, c) });
+
   // Spanish packs list single strings; make every table value a pair
   packs.forEach((p) => Object.keys(p.T).forEach((k) => { if (Array.isArray(p.T[k]) && p.T[k].length === 1) p.T[k] = P(p.T[k][0]); }));
 
@@ -468,7 +528,7 @@ FT.cultures = (() => {
       || packs.find((p) => t.includes(p.id) || p.name.toLowerCase().includes(t));
     if (hit) return hit.id;
     const ALIAS = { bangla: 'bengali', 'north indian': 'hindi', urdu: 'hindi', punjabi: 'punjabi', panjabi: 'punjabi', gurmukhi: 'punjabi', sikh: 'punjabi', chinese: 'mandarin', 'hong kong': 'cantonese', yue: 'cantonese',
-      mexican: 'spanish', latino: 'spanish', latina: 'spanish', latinx: 'spanish', español: 'spanish', american: 'english', us: 'english', nigerian: 'yoruba', yorùbá: 'yoruba', viet: 'vietnamese', gaelic: 'irish', gaeilge: 'irish', irish: 'irish', italiano: 'italian', deutsch: 'german', français: 'french', francais: 'french', svenska: 'swedish' };
+      mexican: 'spanish', latino: 'spanish', latina: 'spanish', latinx: 'spanish', 'puerto ric': 'spanish_pr', boricua: 'spanish_pr', dominican: 'spanish_pr', argentin: 'spanish_ar', uruguay: 'spanish_ar', rioplatense: 'spanish_ar', español: 'spanish', haiti: 'haitian', kreyòl: 'haitian', kreyol: 'haitian', jamaica: 'jamaican', patois: 'jamaican', patwa: 'jamaican', ghana: 'akan', twi: 'akan', asante: 'akan', ashanti: 'akan', fante: 'akan', fanti: 'akan', romania: 'romanian', română: 'romanian', romana: 'romanian', american: 'english', us: 'english', nigerian: 'yoruba', yorùbá: 'yoruba', viet: 'vietnamese', gaelic: 'irish', gaeilge: 'irish', irish: 'irish', italiano: 'italian', deutsch: 'german', français: 'french', francais: 'french', svenska: 'swedish' };
     const k = Object.keys(ALIAS).find((a) => t.includes(a));
     return k ? ALIAS[k] : null;
   }

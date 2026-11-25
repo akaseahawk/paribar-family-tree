@@ -1,6 +1,6 @@
 # Paribar · পরিবার
 
-See how everyone is connected: your whole family, and the friends who are family too, on a **Generations tree** and in **Family circles** around you. Free, offline, and in your family's own words (Mashi, 姨媽, Tía, Bua …), across 18 heritages.
+See how everyone is connected: your whole family, and the friends who are family too, on a **Generations tree** and in **Family circles** around you. Free, offline, and in your family's own words (Mashi, 姨媽, Tía, Bua …), across 24 heritages. Don't see yours? [Let me know](https://github.com/akaseahawk/paribar-family-tree/issues/new?title=Heritage%20request:%20) and I'll add it.
 
 - **Use it:** [akaseahawk.github.io/paribar-family-tree](https://akaseahawk.github.io/paribar-family-tree/)
 - **Open the app directly:** [/app/](https://akaseahawk.github.io/paribar-family-tree/app/)
@@ -10,31 +10,37 @@ Every name in this repo is made up. Real family data never goes in this repo.
 
 ## Why I built this
 
-I went back to India after 20 years knowing only two relatives, both very elderly, and just their names and phone numbers. I built Paribar so that the next time I visit, years from now, I can reach out to everyone directly and keep in touch.
+I went back to India after 20 years knowing only two relatives, both very elderly, and just their names and phone numbers. So I built Paribar (family in Bengali): it shows how everyone is connected and keeps their details in one place, so next time I can reach out to everyone directly.
 
 ```mermaid
 flowchart TD
-  A["A month of visits<br/>home to home"] --> B["Draw it on paper<br/>snap a photo"]
-  A --> C["Phone in the middle<br/>of the room"]
-  C --> D["Hindi, Bengali, English<br/>all mixed together"]
-  D --> E["AI listens, transcribes,<br/>fills in what the<br/>family words imply"]
-  B --> R["AI reads the drawing"]
-  R --> E
-  E --> X["Data file<br/>CSV"]
-  X --> F["Paribar builds the<br/>tree and circles"]
-  G["Phone contacts"] --> F
-  F --> H["Nieces and nephews<br/>see how we connect"]
-  F --> I["Stories that never<br/>came up before"]
+  A["Back after 20 years<br/>knew 2 relatives"] --> B["Built Paribar"]
+  B --> C["A few weeks<br/>home to home"]
+  C --> D["Showed everyone<br/>how they connect"]
+  D --> E["Nieces and nephews<br/>loved it"]
+  D --> F["Stories that never<br/>came up before"]
 ```
 
-- For a month I traveled to different homes, in different parts of the family.
-- At each one we drew the family on paper and snapped a photo. The AI read the drawing and turned it into data.
-- Then we put a phone in the middle of the room and just talked, in a mix of Hindi, Bengali and English, while the AI listened, transcribed it all and turned that into data too.
-- I imported the data into Paribar, and Paribar built the tree and the circles. The AI only saves the typing; you can always add people by hand.
-- It filled in what nobody says out loud, because the family words already carry it: a Mashi is your mother's sister, a Jethu your father's older brother.
-- At every stop I showed everyone how they were all connected. My little nieces and nephews got so excited about it.
+- For a few weeks I went home to home, across the family and close friends.
+- At every stop I showed everyone how they were all connected. My little nieces and nephews loved it.
 - The conversations were the best part: stories that never come up otherwise, like the wild thing a distant uncle once did. He's on the map now.
 - Family history still lives in memories, on paper, or in a photo on the wall. Paribar makes it digital, so you can share it with your kids and keep it, in theory, forever.
+
+### How the family got in
+
+```mermaid
+flowchart TD
+  A["Chicken scratch<br/>on paper"] --> P["Snap a photo"]
+  B["Phone in the middle<br/>of the room"] --> M["Hindi, Bengali, English<br/>all mixed together"]
+  P --> AI["AI turns it<br/>into data"]
+  M --> AI
+  AI --> X["CSV file"]
+  X --> F["Paribar draws the<br/>tree and circles"]
+```
+
+- We drew the family out on paper and snapped a photo, then put a phone in the middle of the room and just talked.
+- An AI read the drawing and the conversation and turned them into data. I imported that, and Paribar built the tree and the circles. The AI only saves the typing; you can always add people by hand.
+- The family words fill in a lot on their own: a Mashi is your mother's sister, a Jethu your father's older brother.
 
 With the holidays here and families getting together, I hope you get to have these conversations too.
 
@@ -44,6 +50,8 @@ With the holidays here and families getting together, I hope you get to have the
 |---|---|
 | ![Family circles map of the sample family, rings around Ishaan, friends on dashed blue lines](docs/images/map-circles.png) | ![Generations tree of the sample family, one column per generation, friends in their own band](docs/images/map-generations.png) |
 | You're in the middle; each ring is one more step away. | One column per generation, couples side by side, friends in their own band. |
+
+<img src="docs/images/people.png" width="360" alt="The People tab with the sample family grouped by side" />
 
 **Friends can be family too.** Add the neighbor who's practically an uncle, Mom's best friend the kids call Auntie, a colleague or a classmate. They appear on both maps, linked through whoever they know, and their families can join too.
 
@@ -70,7 +78,7 @@ mindmap
       Colleagues
       Their families
     Family words
-      18 heritages
+      24 heritages
       Mixed families
     Keep in touch
       Phones

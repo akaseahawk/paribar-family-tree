@@ -8,7 +8,7 @@
 window.FT = window.FT || {};
 
 FT.ai = (() => {
-  const CULTURES = 'Arabic, Bengali, Cantonese, English (American), French, German, Gujarati, Hindi / North Indian, Irish (Gaelic), Italian, Japanese, Korean, Mandarin, Mexican / Latino Spanish, Nigerian (Yoruba), Punjabi, Swedish, Vietnamese';
+  const CULTURES = 'Arabic, Bengali, Cantonese, English (American), French, German, Ghanaian (Akan: Twi, Asante, Fante), Gujarati, Haitian Creole, Hindi / North Indian, Irish (Gaelic), Italian, Jamaican Patois, Japanese, Korean, Mandarin, Nigerian (Yoruba), Punjabi, Romanian, Spanish (Argentina & Uruguay), Spanish (Mexico & Latin America), Spanish (Puerto Rico & Dominican Republic), Swedish, Vietnamese';
 
   // The data dictionary for the CSV the AI hands back. One source for the prompt, the in-app
   // guide and docs/ai-prompt.md, so they can never drift apart. Matches io.js import rules.

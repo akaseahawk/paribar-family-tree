@@ -7,7 +7,7 @@ Paribar is plain HTML, CSS and JavaScript. No framework, no build step for the a
 ```mermaid
 flowchart TD
   UI["app.js<br/>screens and forms"] --> K["kinship.js<br/>paths and words"]
-  K --> C["cultures.js<br/>18 heritages"]
+  K --> C["cultures.js<br/>24 heritages"]
   UI --> M["mindmap.js<br/>maps, D3"]
   M --> F["family.js<br/>generations"]
   F --> K
@@ -21,7 +21,7 @@ themes, aiprompt, checks, dupes, visits, dates, speak, treeimage and demo are he
 |---|---|
 | `js/app.js` | Screens, forms, placing imported people, export |
 | `js/kinship.js` | Finds the path from you to anyone and picks the word for it |
-| `js/cultures.js` | Family words for 18 heritages, with an English fallback that handles "second cousin once removed" |
+| `js/cultures.js` | Family words for 24 heritages, with an English fallback that handles "second cousin once removed" |
 | `js/family.js` | Couples, generations, steps between people, tree layout |
 | `js/mindmap.js` | The Family circles map (degrees of separation) and the Generations tree |
 | `js/io.js` | Reads CSV, JSON, Excel (.xlsx), ZIP and contacts; writes JSON, CSV, ZIP and .vcf; cleans every imported value |
@@ -100,4 +100,4 @@ sequenceDiagram
   end
 ```
 
-Every CSS and JS link in index.html carries `?v=2012`, and sw.js uses a matching cache name (`paribar-v2012`) and drops older `paribar-v*` caches. So a phone never mixes old and new files after an update. Fonts are cache-first. The Android share target (sharing a contact to Paribar) is also handled in sw.js.
+Every CSS and JS link in index.html carries `?v=2013`, and sw.js uses a matching cache name (`paribar-v2013`) and drops older `paribar-v*` caches. So a phone never mixes old and new files after an update. Fonts are cache-first. The Android share target (sharing a contact to Paribar) is also handled in sw.js.

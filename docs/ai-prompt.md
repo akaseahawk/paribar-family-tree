@@ -38,7 +38,7 @@ The full JSON Schema for app backups is in [schema/paribar-backup.schema.json](.
 | nickname |  | Short or pet name | text | Bubai |
 | relation_to_me |  | Plain-English chain from me. Use "me" for me. Blank if mother / father / spouse already connect them | me, or a chain of mother / father / brother / sister / son / daughter / husband / wife | mother's sister's son |
 | called_term |  | What I call them, in my own words | text | Pishi |
-| heritage |  | Only if different from their side of the family (someone who married in) | Arabic, Bengali, Cantonese, English (American), French, German, Gujarati, Hindi / North Indian, Irish (Gaelic), Italian, Japanese, Korean, Mandarin, Mexican / Latino Spanish, Nigerian (Yoruba), Punjabi, Swedish, Vietnamese | Punjabi |
+| heritage |  | Only if different from their side of the family (someone who married in) | Arabic, Bengali, Cantonese, English (American), French, German, Ghanaian (Akan: Twi, Asante, Fante), Gujarati, Haitian Creole, Hindi / North Indian, Irish (Gaelic), Italian, Jamaican Patois, Japanese, Korean, Mandarin, Nigerian (Yoruba), Punjabi, Romanian, Spanish (Argentina & Uruguay), Spanish (Mexico & Latin America), Spanish (Puerto Rico & Dominican Republic), Swedish, Vietnamese | Punjabi |
 | gender |  | Blank if I have not said | m or f | f |
 | mother |  | Their mother, exactly as written in the name column | a name from the name column | Swapna Mukherjee |
 | father |  | Their father, exactly as written in the name column | a name from the name column | Prasanta Mukherjee |
@@ -98,7 +98,7 @@ name,nickname,relation_to_me,called_term,heritage,gender,mother,father,spouse,si
   - nickname: Short or pet name. Allowed: text. Example: Bubai
   - relation_to_me: Plain-English chain from me. Use "me" for me. Blank if mother / father / spouse already connect them. Allowed: me, or a chain of mother / father / brother / sister / son / daughter / husband / wife. Example: mother's sister's son
   - called_term: What I call them, in my own words. Allowed: text. Example: Pishi
-  - heritage: Only if different from their side of the family (someone who married in). Allowed: Arabic, Bengali, Cantonese, English (American), French, German, Gujarati, Hindi / North Indian, Irish (Gaelic), Italian, Japanese, Korean, Mandarin, Mexican / Latino Spanish, Nigerian (Yoruba), Punjabi, Swedish, Vietnamese. Example: Punjabi
+  - heritage: Only if different from their side of the family (someone who married in). Allowed: Arabic, Bengali, Cantonese, English (American), French, German, Ghanaian (Akan: Twi, Asante, Fante), Gujarati, Haitian Creole, Hindi / North Indian, Irish (Gaelic), Italian, Jamaican Patois, Japanese, Korean, Mandarin, Nigerian (Yoruba), Punjabi, Romanian, Spanish (Argentina & Uruguay), Spanish (Mexico & Latin America), Spanish (Puerto Rico & Dominican Republic), Swedish, Vietnamese. Example: Punjabi
   - gender: Blank if I have not said. Allowed: m or f. Example: f
   - mother: Their mother, exactly as written in the name column. Allowed: a name from the name column. Example: Swapna Mukherjee
   - father: Their father, exactly as written in the name column. Allowed: a name from the name column. Example: Prasanta Mukherjee
