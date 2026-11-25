@@ -208,7 +208,7 @@ No account, no server storage, no analytics, and no third-party requests: a Cont
 
 ## Author
 
-Made by [akaseahawk](https://github.com/akaseahawk).
+Made by [Akash](https://github.com/akaseahawk).
 
 ## License
 
