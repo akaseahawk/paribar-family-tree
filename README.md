@@ -18,15 +18,19 @@ flowchart TD
   A --> C["Phone in the middle<br/>of the room"]
   C --> D["Hindi, Bengali, English<br/>all mixed together"]
   D --> E["AI listens, transcribes,<br/>fills in what the<br/>family words imply"]
-  B --> E
-  E --> F["Paribar: tree<br/>and circles"]
+  B --> R["AI reads the drawing"]
+  R --> E
+  E --> X["Data file<br/>CSV"]
+  X --> F["Paribar builds the<br/>tree and circles"]
   G["Phone contacts"] --> F
   F --> H["Nieces and nephews<br/>see how we connect"]
   F --> I["Stories that never<br/>came up before"]
 ```
 
 - For a month I traveled to different homes, in different parts of the family.
-- At each one we drew the family on paper and snapped a photo. Then we put a phone in the middle of the room and just talked, in a mix of Hindi, Bengali and English, while an AI listened and turned it into the data.
+- At each one we drew the family on paper and snapped a photo. The AI read the drawing and turned it into data.
+- Then we put a phone in the middle of the room and just talked, in a mix of Hindi, Bengali and English, while the AI listened, transcribed it all and turned that into data too.
+- I imported the data into Paribar, and Paribar built the tree and the circles. The AI only saves the typing; you can always add people by hand.
 - It filled in what nobody says out loud, because the family words already carry it: a Mashi is your mother's sister, a Jethu your father's older brother.
 - At every stop I showed everyone how they were all connected. My little nieces and nephews got so excited about it.
 - The conversations were the best part: stories that never come up otherwise, like the wild thing a distant uncle once did. He's on the map now.
@@ -95,7 +99,21 @@ flowchart TD
   I --> J
 ```
 
-## Fill it in with an AI chat
+## Stay in touch
+
+```mermaid
+flowchart TD
+  P["Someone's card"] --> W["Chat on WhatsApp"]
+  P --> C["Call to check in"]
+  P --> M["Map: directions<br/>or book a ride"]
+  D["Dates tab"] --> B["Send wishes<br/>happy birthday in<br/>their language"]
+```
+
+Everyone's phone, WhatsApp, address, birthday and visits live in one place, and one tap texts, calls or opens the map.
+
+## Fill it in with an AI chat (optional)
+
+Typing people in by hand works fine. The AI is a shortcut that turns drawings and conversations into the data file Paribar imports. Paribar does the rest.
 
 The app has a ready-made prompt (Settings › Fill it in with an AI chat). It already includes the data dictionary, so the AI knows exactly which columns to produce.
 
@@ -115,6 +133,13 @@ sequenceDiagram
   You->>App: Import the CSV
   App->>You: Report of what was added
 ```
+
+What the AI does for you:
+- **Reads a photo of a hand-drawn tree,** even chicken scratch, and turns it into the table.
+- **Transcribes a room full of people** talking in any mix of languages.
+- **Fills in what family words imply** (Mashi is mother's sister) and asks about the rest.
+
+> **Hot tip: make it a show.** Download the spreadsheet from Paribar (Settings) and give it, with a few family photos, to an AI that makes pictures or video. Ask for a family tree picture or short video in the style of your favorite show, movie or book. Kids love it. Photos you upload go to that company.
 
 Rules the prompt gives the AI:
 - **Ask, don't assume.** No guessed names, genders, sides or ages.

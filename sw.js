@@ -2,7 +2,7 @@
    App files: network-first (always the newest version when online, cached copy when offline),
    installed with cache: 'reload' so a stale browser cache can't mix old and new files.
    Google Fonts: cached on first use. */
-const CACHE = 'paribar-v2011';
+const CACHE = 'paribar-v2012';
 const FONT_HOSTS = ['fonts.googleapis.com', 'fonts.gstatic.com'];
 // The share inbox and caches are named per app, so other sites on the same origin (github.io) are left alone
 const APP = ['./', 'index.html', 'css/styles.css', 'js/db.js', 'js/themes.js', 'js/cultures.js', 'js/kinship.js', 'js/demo.js', 'js/aiprompt.js', 'js/family.js', 'js/mindmap.js', 'js/io.js', 'js/speak.js', 'js/checks.js', 'js/visits.js', 'js/dates.js', 'js/treeimage.js', 'js/dupes.js', 'js/app.js',

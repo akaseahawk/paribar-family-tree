@@ -21,7 +21,7 @@ flowchart TD
 - Loading the page asks GitHub Pages for the app files and Google Fonts for the fonts. Like any website, they see your IP address and browser. They never see family data.
 - Tapping WhatsApp, Call or Map opens that app with that one number or address.
 - **Voice typing** (the mic buttons) uses your browser's speech service. In Chrome that service runs online, so what you say goes to the browser's maker to be turned into text.
-- **AI chats:** anything you tell ChatGPT, Gemini, Claude or Perplexity goes to that company, under their privacy rules. Paribar only gets the CSV you bring back.
+- **AI chats:** anything you tell or show ChatGPT, Gemini, Claude or Perplexity, including photos of drawings, family photos and voice, goes to that company, under their privacy rules. Paribar only gets the CSV you bring back.
 
 ## Things to know
 - **Back up.** Clearing your browser data, or uninstalling the browser, erases Paribar's data. Settings › Back up saves everything to one file.

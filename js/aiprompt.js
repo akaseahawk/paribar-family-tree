@@ -92,9 +92,10 @@ Start now by asking me your first questions.`;
   const TIPS = [
     ['You pick the model, the app doesn\'t', 'This matters more than anything else. On a free plan, choose the most advanced model or setting you can. On a paid plan, choose the second most advanced, or any "thinking" model set to medium or high. High catches more nuance but can overthink it, so find the balance for your family.'],
     ['Put the phone in the middle of the room', 'Use voice mode and let everyone talk, elders especially. Mixing languages mid-sentence (Hindi, Bengali and English, or Spanish and English) works fine. The AI listens, transcribes, and turns it into the table.'],
-    ['Draw it', 'A quick hand-drawn tree on paper, photographed, works great. The AI turns it into a table and asks about what it couldn\'t read.'],
+    ['Draw it', 'A quick hand-drawn tree on paper, even chicken scratch, works great. Send the AI a photo: it reads the drawing, turns it into a table, and asks about anything it couldn\'t read.'],
     ['Let it ask', 'A good AI asks a lot of questions. Answer them: every question it asks is a wrong link it avoided. If it starts guessing, tell it \"ask me instead\".'],
     ['Leave birthdays for the app', 'Add birthdays yourself in Paribar. They\'re easy to get wrong in a chat.'],
+    ['Hot tip: make it a show', 'Once your tree is in Paribar, download the spreadsheet (Settings) and give it, with a few family photos, to an AI that makes pictures or video. Ask for a family tree picture or a short video in the style of your favorite show, movie or book. Kids love it. Photos you upload go to that company.'],
     ['Bring it back', 'Ask for a downloadable CSV and import the file, or copy the code block and paste it under Settings › Or paste it in.'],
   ];
   return { prompt, TIPS, COLUMNS, CULTURES, FIELDS };
