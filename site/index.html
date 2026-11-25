@@ -1,15 +1,27 @@
 <!doctype html>
+<!-- Paribar · License: PolyForm Noncommercial 1.0.0 <https://polyformproject.org/licenses/noncommercial/1.0.0>
+     Required Notice: Copyright akaseahawk (https://github.com/akaseahawk) -->
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <!-- Security: this page can only load its own files and can't send anything anywhere -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-src 'none'" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Paribar · পরিবার — see how everyone is connected</title>
-  <meta name="description" content="Map your whole family, and the friends who are family too, on a Generations tree and in Family circles. Draw it on paper, snap a photo, and keep it forever. 24 heritages. Works offline. No account." />
+  <meta name="description" content="A free family tree and contact book for your phone, in your family's own words. See how everyone is connected, friends included. 24 heritages. No account, works offline, stays on your phone." />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Paribar: see how everyone is connected" />
+  <meta property="og:description" content="A free family tree and contact book for your phone, in your family's own words. No account, works offline, stays on your phone." />
+  <meta property="og:url" content="https://akaseahawk.github.io/paribar-family-tree/" />
+  <meta property="og:image" content="https://akaseahawk.github.io/paribar-family-tree/images/og.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Paribar: the sample family in Family circles around one person" />
+  <meta name="twitter:card" content="summary_large_image" />
   <meta name="theme-color" content="#FBF6EE" />
   <link rel="icon" href="app/icons/icon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600&family=Tiro+Bangla&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="app/css/fonts.css" />
   <style>
     /* Same look as the app: cream paper, red accent, alpana motif strip */
     :root { --bg: #FBF6EE; --surface: #FFFDF9; --line: #E6D9C6; --ink: #2B1B14; --muted: #6E5D52; --red: #A61E24; --red-ink: #7E1419; --red-soft: #F6E3DF;
@@ -31,7 +43,7 @@
     .cta { display: flex; flex-wrap: wrap; gap: 10px; }
     .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: .6rem 1.2rem; border-radius: 12px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-weight: 600; text-decoration: none; }
     .btn.primary { background: var(--red); border-color: var(--red); color: #fff; }
-    .btn:focus-visible { outline: 3px solid var(--red-soft); outline-offset: 2px; }
+    .btn:focus-visible, a:focus-visible, summary:focus-visible { outline: 3px solid var(--red); outline-offset: 2px; }
     .terms { display: flex; flex-wrap: wrap; gap: 8px; margin: 26px 0 0; padding: 0; list-style: none; }
     .terms li { padding: 4px 12px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-size: .95rem; }
     .terms li small { color: var(--muted); }
@@ -61,6 +73,24 @@
     .privacy p { margin: 0; }
     footer { margin: 56px 0 0; padding: 22px 0 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: .92rem; }
     footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+      .trust { margin: 12px 0 0; color: var(--muted); font-size: .95rem; }
+    .alt-link { align-self: center; padding: .6rem .4rem; font-weight: 600; }
+    .terms li small { color: var(--muted); }
+    .terms .more { background: none; border-style: dashed; }
+    .story details { margin: 4px 0 12px; }
+    .story summary { cursor: pointer; color: var(--red-ink); font-weight: 600; padding: 6px 0; }
+    .cta-again { margin: 18px 0 0; }
+    .ask { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; }
+    .ask ol { margin: 6px 0 8px; padding-left: 1.3rem; }
+    .ask li { margin: 4px 0; }
+    .ask p { margin: 0; color: var(--muted); }
+    .share { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+    .sticky { position: fixed; left: 0; right: 0; bottom: 0; z-index: 10; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: rgba(251, 246, 238, .96); border-top: 1px solid var(--line); display: none; }
+    .sticky .btn { width: 100%; }
+    @media (max-width: 700px) { .sticky.show { display: block; } body.has-sticky footer { padding-bottom: 96px; } }
+    footer a { display: inline-block; padding: 8px 0; }
+    .privacy ul { margin: 8px 0; padding-left: 1.2rem; }
+    .privacy li { margin: 3px 0; }
   </style>
 </head>
 <body>
@@ -70,111 +100,146 @@
   </header>
 
   <main class="wrap">
-    <h1>See how everyone is connected</h1>
-    <p class="lead">Paribar maps your whole family, and the friends who are family too. See everyone fall into place on a Generations tree and in Family circles around you, find how any two people are related, and stay in touch. All in your family's own words: Mashi, 姨媽, Tía, Bua, Moster and more.</p>
+    <h1>Mashi, Bua, 姨媽, Tía, Wɔfa: know who's who</h1>
+    <p class="lead">A free family tree and contact book for your phone. See how everyone is connected, the friends who are family too, and what to call each person, in 24 heritages.</p>
     <div class="cta">
-      <a class="btn primary" href="app/">Open the app</a>
-      <a class="btn" href="download/paribar-standalone.html" download>Download single file</a>
-      <a class="btn" href="https://github.com/akaseahawk/paribar-family-tree#readme">How it works</a>
+      <a class="btn primary" id="heroCta" href="app/?demo=1&amp;tab=map">See the sample family</a>
+      <a class="alt-link" href="app/">or start your own</a>
     </div>
+    <p class="trust">Free · no account · works offline · stays on your phone · <a href="https://github.com/akaseahawk/paribar-family-tree">source on GitHub</a></p>
     <ul class="terms" aria-label="Examples of family words">
-      <li lang="bn">মাসি <small>Mashi</small></li>
-      <li lang="zh-HK">姨媽 <small>Ji Maa</small></li>
-      <li lang="es">Tía <small>Spanish</small></li>
-      <li lang="pa">ਭੂਆ <small>Bhua</small></li>
-      <li lang="ko">이모 <small>Imo</small></li>
-      <li lang="sv">Moster <small>Swedish</small></li>
-      <li lang="ar">خالة <small>Khala</small></li>
+      <li><span lang="bn">মাসি</span> <small>Mashi · mom's sister</small></li>
+      <li><span lang="zh-HK">姨媽</span> <small>Ji Maa · mom's sister</small></li>
+      <li><span lang="es">Tía</span> <small>aunt</small></li>
+      <li><span lang="es-PR">Titi</span> <small>auntie, Puerto Rico</small></li>
+      <li><span lang="pa">ਭੂਆ</span> <small>Bhua · dad's sister</small></li>
+      <li><span lang="ak">Wɔfa</span> <small>mom's brother, Akan</small></li>
+      <li><span lang="yo">Ẹ̀gbọ́n</span> <small>older sibling, Yoruba</small></li>
+      <li><span lang="ko">이모</span> <small>Imo · mom's sister</small></li>
+      <li><span lang="ar">خالة</span> <small>Khala · mom's sister</small></li>
+      <li class="more"><a href="https://github.com/akaseahawk/paribar-family-tree/issues/new?title=Heritage%20request:%20">Don't see yours? Ask me</a></li>
     </ul>
 
     <h2>Why I built this</h2>
     <div class="story">
-      <p>I went back to India after 20 years knowing only two relatives, both very elderly, and just their names and phone numbers. So I built Paribar (family in Bengali), an app that shows how everyone is connected and keeps their details in one place, so that next time I can reach out to everyone directly and keep in touch.</p>
-      <p>Then for a few weeks I went home to home, across the family and close friends. At every stop I showed everyone how they were all connected, on the family tree and in the circles, and my little nieces and nephews loved it. We added phone numbers and took pictures of everyone, great-grandparents included.</p>
-      <p>The best part was the conversations. Mapping it all out brought up stories that never come up otherwise, like the wild thing a distant uncle once did. He's on the map now.</p>
-      <p>How the family got in: we drew it out in chicken scratch on paper and snapped a photo, then put a phone in the middle of the room and just talked, in Hindi, Bengali and English all mixed together. An AI read the drawing and the conversation and turned them into data, I imported that into Paribar, and Paribar drew the tree. The family words fill in a lot on their own: a Mashi is your mother's sister, a Jethu your father's older brother.</p>
-      <p>We live in a data-rich world, but family history still lives in what people remember, on scraps of paper, or in a photo of an ancestor on the wall. Paribar makes it digital, so you can share it with your kids and keep it, in theory, forever.</p>
-      <p class="sign">With the holidays here and families getting together, I hope you get to have these conversations too.<br/>— <a href="https://github.com/akaseahawk">akaseahawk</a></p>
+      <p>I went back to India after 20 years knowing just two relatives, both very elderly, and only their names and phone numbers. So I built Paribar (family in Bengali) to show how everyone is connected and keep their details in one place, so next time I could reach out myself.</p>
+      <p>Then I spent a few weeks going home to home, through the family and close friends, showing everyone how they're all connected. My little nieces and nephews loved it. And mapping it out brought up stories that never come up otherwise, like the wild thing a distant uncle once did. He's on the map now.</p>
+      <details>
+        <summary>How the family got in</summary>
+        <p>We drew the family in chicken scratch on paper, then put a phone in the middle of the room and just talked, in Hindi, Bengali and English all at once. An AI turned that into a file, and Paribar drew the tree. We added phone numbers and took everyone's picture, great-grandparents included.</p>
+        <p>Family history still lives in what people remember, on scraps of paper and in the photo on the wall. Paribar keeps it somewhere you can share with your kids.</p>
+      </details>
+      <p class="sign">With the holidays here and everyone together, I hope you get to have these conversations too.<br/>— <a href="https://github.com/akaseahawk">akaseahawk</a></p>
     </div>
 
-    <h2>Two ways to see your family</h2>
+    <h2 id="see">Two ways to see your family</h2>
+    <p class="body">Both are on the Map tab. Try them with the sample family.</p>
     <div class="maps">
       <figure class="card shot">
-        <a href="images/map-circles.png"><img src="images/map-circles.png" width="1400" height="1436" loading="lazy" alt="Family circles: the sample family in rings around Ishaan, with friends linked by dashed blue lines" /></a>
-        <figcaption><b>Family circles</b>You're in the middle. Everyone sits on a circle by how many steps away they are: parents and siblings close in, grandparents and cousins further out. Friends link in with dashed blue lines.</figcaption>
+        <img src="images/map-circles.webp" width="900" height="923" alt="Family circles: the sample family in rings around Ishaan, with friends linked by dashed blue lines" />
+        <figcaption><b>Family circles</b>You're in the middle. Everyone sits on a ring by how closely they're related: parents and siblings close in, cousins farther out. Friends link in with dashed blue lines.</figcaption>
       </figure>
       <figure class="card shot">
-        <a href="images/map-generations.png"><img src="images/map-generations.png" width="1100" height="2034" loading="lazy" alt="Generations tree: the sample family in columns by generation, couples side by side, with friends in their own band" /></a>
+        <img src="images/map-generations.webp" width="700" height="1294" loading="lazy" alt="Generations tree: the sample family in columns by generation, couples side by side, with friends in their own band" />
         <figcaption><b>Generations tree</b>Each generation gets its own column, with couples side by side and friends in their own band. Tap anyone to light up the path from you.</figcaption>
       </figure>
     </div>
+    <div class="sides" role="list" aria-label="Side colors">
+      <span role="listitem"><i style="border-color:var(--maternal)"></i>Mother's side</span>
+      <span role="listitem"><i style="border-color:var(--paternal)"></i>Father's side</span>
+      <span role="listitem"><i style="border-color:var(--inlaw)"></i>In-laws</span>
+      <span role="listitem"><i style="border-color:var(--friend)"></i>Friends</span>
+    </div>
+    <div class="cta cta-again"><a class="btn primary" href="app/?demo=1&amp;tab=map">See the sample family</a></div>
+
+    <h2>Tonight at the table</h2>
+    <div class="ask">
+      <p>Three questions that get everyone talking:</p>
+      <ol>
+        <li>Who was the first in the family to leave home, and why?</li>
+        <li>What did you call your grandparents' brothers and sisters?</li>
+        <li>Which relative has the story everyone tells?</li>
+      </ol>
+      <p>Sketch the answers on a napkin. That's enough to start your tree.</p>
+    </div>
 
     <h2>Friends can be family too</h2>
-    <p class="body">Add the neighbor who's practically an uncle, Mom's best friend the kids call Auntie, a colleague, a classmate. They show up on both maps, linked through whoever they know, and their families can join too. In a Bengali family, a friend's mother even gets a courtesy word like Mashima.</p>
+    <p class="body">Add the neighbor who's practically an uncle, the friend your kids call Auntie, a colleague, a classmate. They show up in both views, linked through whoever they know. In a Bengali family, a friend's mom even gets a courtesy word: Mashima.</p>
 
-    <h2>Let the AI do the typing</h2>
-    <p class="body">Typing everyone in by hand works fine. The AI is just a shortcut: it turns drawings and conversations into the data Paribar imports. Paribar builds the tree, the circles and everything else.</p>
+    <h2>Type it in, or let an AI do it</h2>
+    <p class="body">Typing works fine, and keeps everything on your phone. An AI chat is a shortcut for big families: it turns a drawing or a conversation into a file, and Paribar builds the rest.</p>
     <div class="grid">
-      <div class="card"><b>Reads your drawing</b><p>Draw the family on paper, even chicken scratch, and send the AI a photo. It reads the drawing and turns it into the table Paribar imports.</p></div>
-      <div class="card"><b>Listens to the room</b><p>Put the phone in the middle of the room and let everyone talk, in any mix of languages. The AI transcribes it and fills in what the family words already say.</p></div>
+      <div class="card"><b>Reads your drawing</b><p>Draw the family on paper and send the AI a photo.</p></div>
+      <div class="card"><b>Listens to the room</b><p>Let everyone talk, in any mix of languages. The AI fills in what the family words already say.</p></div>
       <div class="card"><b>Asks, doesn't guess</b><p>When something's unclear, like which uncle, it asks. Then it hands you one file to import.</p></div>
     </div>
     <figure class="card shot drawing-shot">
-      <a href="images/paper-drawing.jpg"><img src="images/paper-drawing.jpg" width="1380" height="840" loading="lazy" alt="A hand-drawn family tree on paper, in blue pen, with the sample family's names and a few crossed-out notes" /></a>
-      <figcaption><b>Chicken scratch is plenty</b>A drawing like this (sample family, made-up names) is all the AI needs. Snap a photo, and it turns it into the file Paribar imports.</figcaption>
+      <img src="images/paper-drawing.webp" width="1000" height="608" loading="lazy" alt="A hand-drawn family tree on paper, in blue pen, with the sample family's names and a few crossed-out notes" />
+      <figcaption><b>Chicken scratch is plenty</b>A drawing like this (sample family, made-up names) is all the AI needs.</figcaption>
     </figure>
-    <div class="tip"><b>Hot tip: make it a show.</b> Download the spreadsheet from Paribar and give it, with a few family photos, to an AI that makes pictures or video. Ask for a family tree picture or a short video in the style of your favorite show, movie or book. Kids love it.</div>
 
     <h2>Stay in touch</h2>
-    <p class="body">Paribar keeps everyone's details in one place, and one tap does the rest:</p>
+    <p class="body">Everyone's details in one place. One tap to call, chat, email or get directions.</p>
     <figure class="card shot people-shot">
-      <a href="images/people.png"><img src="images/people.png" width="1000" height="1149" loading="lazy" alt="The People tab with the sample family in the Cantonese language and theme: Kai shows as 細佬 Sai Lou, little brother" /></a>
-      <figcaption><b>Everyone in one place, in your family's words</b>Here in Cantonese: Kai is 細佬 Sai Lou, little brother. Group by side, generation or family, and tap a name for a bigger photo, Call, Text, Email or Map.</figcaption>
+      <img src="images/people.webp" width="700" height="804" loading="lazy" alt="The People tab with the sample family in the Cantonese language and theme: Kai shows as 細佬 Sai Lou, little brother" />
+      <figcaption><b>Everyone in one place, in your family's words</b>Here in Cantonese: Kai is 細佬 Sai Lou, little brother. Tap a name for a bigger photo, Call, Chat, Write or Map.</figcaption>
     </figure>
     <div class="grid">
-      <div class="card"><b>Happy birthday</b><p>The Dates tab lists upcoming birthdays and anniversaries. Send wishes opens WhatsApp with a message in their family's language, ready to send.</p></div>
-      <div class="card"><b>Call to check in</b><p>Tap Call or Chat on anyone's card.</p></div>
-      <div class="card"><b>Go see them</b><p>Tap Map to open their address, for directions or to book a ride.</p></div>
-      <div class="card"><b>Remember visits</b><p>Log who you saw, where, gifts and photos, so next time you remember.</p></div>
+      <div class="card"><b>Happy birthday</b><p>Tap Send wishes to open WhatsApp with a greeting in their family's words.</p></div>
+      <div class="card"><b>Check in</b><p>Tap Call or Chat on anyone's card.</p></div>
+      <div class="card"><b>Go see them</b><p>Tap Map for directions, or to book a ride.</p></div>
+      <div class="card"><b>Remember visits</b><p>Log who you saw, where, gifts and photos, for next time.</p></div>
     </div>
 
-    <h2>Start in four steps</h2>
+    <h2>Get started in four steps</h2>
     <ol class="steps">
-      <li><b>Open the app</b> on your phone. Tap <b>Try the sample family first</b> and open the <b>Map</b> tab to explore both views.</li>
-      <li><b>Start with you.</b> Add your name and pick the heritage of each side of your family.</li>
-      <li><b>Add family:</b> type them in, or save time with the built-in AI prompt. Copy it into ChatGPT, Gemini, Claude or Perplexity. Send it a photo of a tree drawn on paper, or put the phone in the middle of the room and let everyone talk, in any mix of languages. Import the file it gives you, plus your phone contacts. Paribar builds the tree from it.</li>
-      <li><b>Install it:</b> use your browser's "Add to Home screen". It works offline after that.</li>
+      <li><b>See the sample family</b> to explore both views. <a href="app/?demo=1&amp;tab=map">Open it</a></li>
+      <li><b>Start with you:</b> add your name and pick each side's heritage. <a href="app/">Start</a></li>
+      <li><b>Add family:</b> type them in, or copy the built-in AI prompt into any chatbot and give it a photo of a paper tree or a recording of the room. Import the file it gives you. You can add phone contacts too.</li>
+      <li><b>Keep it handy (optional):</b> in your browser menu, tap Add to Home screen (Android) or Share, then Add to Home Screen (iPhone). It works offline after that.</li>
     </ol>
 
-    <h2>What it does</h2>
-    <div class="grid">
-      <div class="card"><b>Generations tree and Family circles</b><p>The whole family, and friends, on two maps. Zoom, find anyone, highlight a side, and save a picture to share.</p></div>
-      <div class="card"><b>Trails between people</b><p>Pick any two people and see exactly how they're related, step by step.</p></div>
-      <div class="card"><b>Friends who are family</b><p>Friends, neighbors, colleagues and classmates, with their own families, right on the map.</p></div>
-      <div class="card"><b>24 heritages</b><p>Bengali, Hindi, Punjabi, Gujarati, Cantonese, Mandarin, Japanese, Korean, Vietnamese, Arabic, Ghanaian (Akan: Twi, Asante, Fante), Nigerian (Yoruba), Spanish (Mexico &amp; Latin America, Puerto Rico &amp; Dominican Republic, Argentina &amp; Uruguay), Haitian Creole, Jamaican Patois, English, French, German, Irish, Italian, Romanian, Swedish. Don't see yours? <a href="https://github.com/akaseahawk/paribar-family-tree/issues/new?title=Heritage%20request:%20">Let me know</a> and I'll add it.</p></div>
-      <div class="card"><b>Mixed families</b><p>Each side of the family keeps its own words. Use the Language menu to see everyone in another heritage's words.</p></div>
-      <div class="card"><b>Contacts and visits</b><p>Phones, WhatsApp, addresses, photos, birthdays, and a log of visits and gifts. Text, call or open a map in one tap.</p></div>
-      <div class="card"><b>Themes</b><p>Ten heritage color and motif themes. Side colors never change, so maps keep their meaning.</p></div>
-      <div class="card"><b>Your files</b><p>Back up to JSON, CSV (opens in Excel), ZIP with photos, or contacts (.vcf) for your phone. Imports Excel too.</p></div>
-    </div>
-    <div class="sides" aria-label="Side colors">
-      <span><i style="border-color:var(--maternal)"></i>Mother's side</span>
-      <span><i style="border-color:var(--paternal)"></i>Father's side</span>
-      <span><i style="border-color:var(--inlaw)"></i>In-laws</span>
-      <span><i style="border-color:var(--friend)"></i>Friends</span>
+    <h2>Private by design</h2>
+    <div class="privacy">
+      <p><b>No account. Nothing on a server. Your family stays on your phone.</b></p>
+      <ul>
+        <li>No ads, no tracking, no analytics. The page only loads its own files, and a security policy stops it from sending data to any other site.</li>
+        <li>Back up now and then: clearing your browser data erases it.</li>
+        <li>Anything you tell or show an AI chat, photos included, goes to that company. Voice typing uses your browser's speech service.</li>
+        <li>The code is public, so you can check. <a href="https://github.com/akaseahawk/paribar-family-tree/blob/main/docs/privacy.md">Privacy details</a> · <a href="https://github.com/akaseahawk/paribar-family-tree/blob/main/SECURITY.md">Security</a></li>
+      </ul>
     </div>
 
-    <h2>Private by design</h2>
-    <div class="privacy"><p>No account and no server storage. Your family stays in your phone's browser and in the backup files you save. Back up now and then, because clearing your browser data erases it. Voice typing uses your browser's speech service, and anything you tell or show an AI chat, photos included, goes to that company. <a href="https://github.com/akaseahawk/paribar-family-tree/blob/main/docs/privacy.md">Privacy details</a></p></div>
+    <h2>Everything it does</h2>
+    <div class="grid">
+      <div class="card"><b>24 heritages</b><p>Bengali, Hindi, Punjabi, Gujarati, Cantonese, Mandarin, Japanese, Korean, Vietnamese, Arabic, Ghanaian (Akan: Twi, Asante, Fante), Nigerian (Yoruba), Spanish (Mexico &amp; Latin America, Puerto Rico &amp; Dominican Republic, Argentina &amp; Uruguay), Haitian Creole, Jamaican Patois, English, French, German, Irish, Italian, Romanian, Swedish. <a href="https://github.com/akaseahawk/paribar-family-tree/issues/new?title=Heritage%20request:%20">Don't see yours? Ask me</a>, or just message me.</p></div>
+      <div class="card"><b>Mixed families</b><p>Each side keeps its own words. The Language menu shows everyone in another heritage's words.</p></div>
+      <div class="card"><b>How any two people are related</b><p>Pick two people and see the path between them, step by step.</p></div>
+      <div class="card"><b>Your files</b><p>Back up to JSON, CSV (opens in Excel), ZIP with photos, or contacts (.vcf). Imports Excel too.</p></div>
+    </div>
+    <div class="tip"><b>Fun extra: make it a show.</b> Export your family from Paribar and give it, with a few photos, to an AI that makes pictures or video. Ask for a family tree in the style of your favorite show, movie or book. Kids love it.</div>
+
+    <h2>Pass it on</h2>
+    <div class="share">
+      <button class="btn" id="shareBtn" type="button">Send this to the cousin who knows everyone</button>
+    </div>
+    <p class="body" style="margin-top:12px">If a story comes up at your table, I'd love to hear it. Reply in the thread or message me.</p>
   </main>
 
   <footer>
     <div class="wrap">
       <span>Made by <a href="https://github.com/akaseahawk">akaseahawk</a></span>
-      <a href="https://github.com/akaseahawk/paribar-family-tree">Source on GitHub</a>
+      <a href="https://github.com/akaseahawk/paribar-family-tree#readme">How it works</a>
+      <a href="download/paribar-standalone.html" download>Download as one file (for laptops)</a>
       <a href="https://github.com/akaseahawk/paribar-family-tree/blob/main/docs/ai-prompt.md">The AI prompt</a>
       <a href="https://github.com/akaseahawk/paribar-family-tree/blob/main/docs/privacy.md">Privacy</a>
+      <a href="https://github.com/akaseahawk/paribar-family-tree/blob/main/SECURITY.md">Security</a>
+      <a href="https://github.com/akaseahawk/paribar-family-tree">Source on GitHub</a>
+      <a href="https://github.com/akaseahawk/paribar-family-tree/blob/main/LICENSE.md">License: PolyForm Noncommercial</a>
     </div>
   </footer>
+
+  <div class="sticky" id="sticky"><a class="btn primary" href="app/?demo=1&amp;tab=map">See the sample family</a></div>
+  <script src="site.js"></script>
 </body>
 </html>

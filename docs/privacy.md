@@ -18,7 +18,8 @@ flowchart TD
 
 ## What leaves your phone
 - Nothing about your family, unless you share a backup file yourself.
-- Loading the page asks GitHub Pages for the app files and Google Fonts for the fonts. Like any website, they see your IP address and browser. They never see family data.
+- Loading the page asks GitHub Pages for the app files, fonts included. Like any website, GitHub sees your IP address and browser. It never sees family data.
+- Nothing is requested from any other site. A Content-Security-Policy on every page makes the browser block any attempt to send data elsewhere.
 - Tapping WhatsApp, Call or Map opens that app with that one number or address.
 - **Voice typing** (the mic buttons) uses your browser's speech service. In Chrome that service runs online, so what you say goes to the browser's maker to be turned into text.
 - **AI chats:** anything you tell or show ChatGPT, Gemini, Claude or Perplexity, including photos of drawings, family photos and voice, goes to that company, under their privacy rules. Paribar only gets the CSV you bring back.
@@ -28,6 +29,7 @@ flowchart TD
 - **Protect storage.** Settings › Protect storage from cleanup asks the browser not to clear it on its own.
 - **Shared phones.** Anyone who can open your browser can open Paribar.
 - **Imported files are checked.** IDs, photos and visits from a file are cleaned before they're saved, to block known code-injection tricks.
+- **Security details** and what Paribar doesn't protect against: [SECURITY.md](../SECURITY.md).
 - **The github.io address is shared.** Browsers treat everything under akaseahawk.github.io as one site, so other projects on that address could in principle read Paribar's storage. None of them do, and a custom domain would remove this entirely.
 
 ## This repo

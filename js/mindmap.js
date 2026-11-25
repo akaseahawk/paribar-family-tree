@@ -389,7 +389,7 @@ FT.mindmap = (() => {
     });
 
     lastMembers = memberPos; lastGeo = mode === 'gen' ? geo : null;
-    if (fit && mode === 'gen') fitWidth(focusId); else if (fit) fitView(); else allowFullZoomOut();
+    if (fit && mode === 'gen') fitWidth(focusId); else if (fit) fitView(focusId); else allowFullZoomOut();
   }
 
   // Light up some people and fade everything else; null clears it.
@@ -459,8 +459,19 @@ FT.mindmap = (() => {
     const t = d3.zoomIdentity.translate(W / 2 - ((x0 + x1) / 2) * k, top + (H - top - bottom) / 2 - ((y0 + y1) / 2) * k).scale(k);
     svg.transition().duration(400).call(zoom.transform, t);
   }
-  function fitView() {
+  // Fit everything, unless that makes names too small to read: then start zoomed in on the focus person
+  // (pinch out to see everyone)
+  const MIN_READABLE = 0.72; // 12.5px names stay at ~9px or more
+  function fitView(focusId) {
     const bb = gRoot.node().getBBox(); if (!bb.width) return;
+    const el = svg.node(); const W = el.clientWidth || 360, H = el.clientHeight || 520;
+    const k = Math.min(1.1, (W - 40) / bb.width, (H - 166) / bb.height);
+    const m = focusId && lastMembers.get(focusId);
+    if (k < MIN_READABLE && m) {
+      zoom.scaleExtent([Math.min(0.2, k * 0.6), 3]);
+      svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity.translate(W / 2 - m.x * MIN_READABLE, 96 + (H - 166) / 2 - m.y * MIN_READABLE).scale(MIN_READABLE));
+      return;
+    }
     fitBox(bb.x, bb.y, bb.x + bb.width, bb.y + bb.height);
   }
   // The tall Generations tree: fill the screen width (readable), centered down the page on one person

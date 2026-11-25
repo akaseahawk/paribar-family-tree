@@ -1,8 +1,14 @@
 {
   "name": "paribar",
-  "version": "2.0.13",
+  "version": "2.0.14",
   "private": true,
   "description": "Offline family tree and contact book with kinship terms in 24 heritages",
-  "scripts": { "start": "node server.js", "build:standalone": "python3 build-standalone.py" },
-  "engines": { "node": ">=18" }
+  "scripts": {
+    "start": "node server.js",
+    "build:standalone": "python3 build-standalone.py"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "license": "PolyForm-Noncommercial-1.0.0"
 }

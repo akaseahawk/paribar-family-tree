@@ -32,9 +32,10 @@ flowchart TD
 ```
 
 ## Versioning checklist
-- `index.html`: the version label (`Paribar v2.0.13 …`) and every `?v=` tag.
-- `sw.js`: `CACHE = 'paribar-v2013'`.
-- `package.json`: `"version": "2.0.13"`.
+- `index.html`: the version label (`Paribar v2.0.14 …`) and every `?v=` tag.
+- `sw.js`: `CACHE = 'paribar-v2014'`.
+- `package.json`: `"version": "2.0.14"`.
+- New files the app needs offline go in the `APP` list in `sw.js`.
 - `docs/ai-prompt.md`: regenerate with `node scripts/export-prompt.js` after changing `js/aiprompt.js`.
 
 ## Rules for this repo
@@ -43,4 +44,5 @@ flowchart TD
   `PARIBAR_DENYLIST=/path/outside/repo/pii-denylist.txt scripts/pii-check.sh`
   If it can't find a deny-list it prints "Nothing to check" and passes, so make sure the path is right. A `pii-allowlist.txt` next to the deny-list can allow entries that are meant to be public, like the author's GitHub handle.
 - **Escape what you render.** Use `esc()` for any user text that goes into HTML.
+- **Keep it self-contained.** Every page has a Content-Security-Policy `<meta>` tag that only allows the site's own files. Don't add CDNs, web fonts or analytics; put files in `vendor/` or `fonts/` instead. No inline `<script>` or `onclick=` attributes in the app (the CSP blocks them).
 - **Never drop data.** The storage format only gains fields; older backups must still import.

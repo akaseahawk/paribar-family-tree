@@ -1,18 +1,21 @@
 <!doctype html>
+<!-- Paribar · License: PolyForm Noncommercial 1.0.0 <https://polyformproject.org/licenses/noncommercial/1.0.0>
+     Required Notice: Copyright akaseahawk (https://github.com/akaseahawk) -->
 <html lang="en">
 <head>
   <meta charset="utf-8" />
+  <!-- Security: the browser only lets this page load its own files and send nothing to any other site -->
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' data: blob:; media-src 'self' data: blob:; manifest-src 'self'; worker-src 'self'; base-uri 'none'; form-action 'none'; object-src 'none'; frame-src 'none'" />
+  <meta name="referrer" content="no-referrer" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Paribar · পরিবার — family map</title>
-  <meta name="description" content="Offline family tree and contact book with Bengali kinship terms." />
+  <meta name="description" content="Offline family tree and contact book in your family's own words." />
   <meta name="theme-color" content="#FBF6EE" />
   <link rel="manifest" href="manifest.webmanifest" />
   <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
   <link rel="apple-touch-icon" href="icons/icon-192.png" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600&family=Tiro+Bangla&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/styles.css?v=2013" />
+  <link rel="stylesheet" href="css/fonts.css?v=2014" />
+  <link rel="stylesheet" href="css/styles.css?v=2014" />
 </head>
 <body>
   <!-- ===== Header: accent border + heritage motif strip (themes.js) ===== -->
@@ -42,7 +45,11 @@
         <h1 class="display">Start with you</h1>
         <p class="lede">Everyone gets placed around you. Then see how the whole family connects, plus the friends who are family too, on a <b>Generations tree</b> and in <b>Family circles</b> around you, with the right word for each person in your family's own language: Mashi, 姨媽, Tía, Bua, Imo …</p>
         <div class="start-ways">
-          <button class="btn primary block" type="button" id="setupAi">Start with an AI chat (easiest)</button>
+          <div class="start-pair">
+            <button class="btn block" type="button" id="setupType">Type it in</button>
+            <button class="btn block" type="button" id="setupAi">Use an AI chat</button>
+          </div>
+          <p class="hint start-note">Typing keeps everything on your phone. An AI chat is faster for big families, but whatever you tell or show it goes to that company, so ask people before you record them.</p>
           <button class="btn ghost block" type="button" id="setupDemo">Try the sample family first</button>
         </div>
         <form id="setupForm" class="form">
@@ -138,6 +145,7 @@
         <label class="small-select layer-select">Show
           <select id="mapLayer" aria-label="Which layer to show"><option value="all">All</option><option value="family">Family</option><option value="friends">Friends</option></select>
         </label>
+        <button class="btn small map-key-btn" id="mapKeyBtn" type="button" aria-expanded="false" aria-controls="mapLegend">Key</button>
         <button class="icon-btn" id="mapPicture" type="button" aria-label="Save map as a picture" title="Save as picture / print"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><circle cx="9" cy="10.5" r="1.8"/><path d="m4.5 17 5-4.5 3.5 3 2.5-2 4 3.5"/></svg></button>
       </div>
       <div class="map-canvas" id="mapCanvas"></div>
@@ -266,7 +274,7 @@
         <button class="btn small" id="dataReset" type="button" title="Clear the paste box and import report, merge back on">Reset</button></div>
       <div class="panel stats" id="stats"></div>
 
-      <div class="panel">
+      <div class="panel" id="backupPanel">
         <h3>Back up</h3>
         <p class="hint">Your data only lives on this phone. Export often — send the file to yourself on WhatsApp or Google Drive.</p>
         <div class="btn-col">
@@ -354,7 +362,7 @@
           <button class="btn danger" id="wipeBtn">Erase everything on this phone</button>
         </div>
       </div>
-      <p class="hint center">Paribar v2.0.13 preview · 24 heritages · data model v2 + visits (JSON + CSV + ZIP)</p>
+      <p class="hint center">Paribar v2.0.14 preview · 24 heritages · data model v2 + visits (JSON + CSV + ZIP)</p>
     </section>
   </main>
 
@@ -404,23 +412,23 @@
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <input type="file" accept=".json,.csv,.xlsx,.xls,.zip,.vcf,application/json,text/csv,text/plain,application/zip,text/vcard,text/x-vcard,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel" id="setupImportFile" hidden />
 
-  <script src="vendor/d3.min.js?v=2013"></script>
-  <script src="vendor/fflate.min.js?v=2013"></script>
-  <script src="js/db.js?v=2013"></script>
-  <script src="js/themes.js?v=2013"></script>
-  <script src="js/cultures.js?v=2013"></script>
-  <script src="js/kinship.js?v=2013"></script>
-  <script src="js/demo.js?v=2013"></script>
-  <script src="js/aiprompt.js?v=2013"></script>
-  <script src="js/family.js?v=2013"></script>
-  <script src="js/mindmap.js?v=2013"></script>
-  <script src="js/io.js?v=2013"></script>
-  <script src="js/speak.js?v=2013"></script>
-  <script src="js/checks.js?v=2013"></script>
-  <script src="js/visits.js?v=2013"></script>
-  <script src="js/dates.js?v=2013"></script>
-  <script src="js/treeimage.js?v=2013"></script>
-  <script src="js/dupes.js?v=2013"></script>
-  <script src="js/app.js?v=2013"></script>
+  <script src="vendor/d3.min.js?v=2014"></script>
+  <script src="vendor/fflate.min.js?v=2014"></script>
+  <script src="js/db.js?v=2014"></script>
+  <script src="js/themes.js?v=2014"></script>
+  <script src="js/cultures.js?v=2014"></script>
+  <script src="js/kinship.js?v=2014"></script>
+  <script src="js/demo.js?v=2014"></script>
+  <script src="js/aiprompt.js?v=2014"></script>
+  <script src="js/family.js?v=2014"></script>
+  <script src="js/mindmap.js?v=2014"></script>
+  <script src="js/io.js?v=2014"></script>
+  <script src="js/speak.js?v=2014"></script>
+  <script src="js/checks.js?v=2014"></script>
+  <script src="js/visits.js?v=2014"></script>
+  <script src="js/dates.js?v=2014"></script>
+  <script src="js/treeimage.js?v=2014"></script>
+  <script src="js/dupes.js?v=2014"></script>
+  <script src="js/app.js?v=2014"></script>
 </body>
 </html>

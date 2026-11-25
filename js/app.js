@@ -224,12 +224,12 @@
     const last = S.meta.lastBackup ? new Date(S.meta.lastBackup) : null;
     const days = last ? Math.floor((Date.now() - last) / 864e5) : null;
     const changes = S.meta.changesSinceBackup || 0;
-    const nudge = n > 3 && (days === null || days >= 3 || changes >= 10);
+    const nudge = !S.meta.demo && n > 3 && (days === null || days >= 3 || changes >= 10);
     const label = !last ? 'Not backed up' : changes >= 10 ? `${changes} changes · back up` : `Backup ${days}d ago`;
     const db = $('#demoBanner'); if (db) db.hidden = !S.meta.demo;
     $('#headerMeta').innerHTML = `<span>${n} ${n === 1 ? 'person' : 'people'}</span>` +
       (nudge ? `<button class="pill warn" id="nudge">${label}</button>` : '');
-    const nb = $('#nudge'); if (nb) nb.onclick = quickBackup;
+    const nb = $('#nudge'); if (nb) nb.onclick = goBackup;
   }
 
   const SIDE_LABEL = { me: 'You', close: 'Close family', maternal: "Ma's side · মামার বাড়ি", paternal: "Baba's side · বাবার দিক", inlaw: 'In-laws · শ্বশুরবাড়ি',
@@ -1025,6 +1025,12 @@
     clearTimeout(changeTimer); // a pending counter write must not undo the reset
     await setMeta('lastBackup', new Date().toISOString()); await setMeta('changesSinceBackup', 0); renderHeader(); renderStats();
   }
+  // Header pill: open Settings at the backup options, so you choose where the file goes
+  function goBackup() {
+    show('data');
+    const el = $('#backupPanel'); if (!el) return;
+    requestAnimationFrame(() => { el.scrollIntoView({ block: 'start' }); el.classList.add('flash'); setTimeout(() => el.classList.remove('flash'), 1600); });
+  }
   // One tap from the header pill: share sheet on Android (WhatsApp, Drive…), download elsewhere
   async function quickBackup() {
     const n = S.meta.changesSinceBackup || 0;
@@ -1037,7 +1043,7 @@
     S.meta.changesSinceBackup = (S.meta.changesSinceBackup || 0) + 1;
     clearTimeout(changeTimer); // write the counter once per burst of saves, not on every single one
     changeTimer = setTimeout(() => { FT.db.setMeta('changesSinceBackup', S.meta.changesSinceBackup); renderHeader(); }, 400);
-    if (S.meta.changesSinceBackup === 10) setTimeout(() => toast('10 changes since your last backup. Tap the red button at the top to back up.'), 600);
+    if (S.meta.changesSinceBackup === 10 && !S.meta.demo) setTimeout(() => toast('10 changes since your last backup. Tap the red button at the top to see backup options.'), 600);
   }
 
   async function exportShare() {
@@ -1512,14 +1518,15 @@
     $('#aiDlg').showModal();
   }
 
-  async function loadDemo() {
+  async function loadDemo(tab = 'people') {
+    if (typeof tab !== 'string') tab = 'people';
     if (S.people.length > 1 && !await ask('Replace your data with the sample family? Export a backup first if needed.')) return;
     // Made-up family (js/demo.js): Bengali father's side, Cantonese mother's side
     const demo = FT.demo.build(uid);
     const meta = { ...S.meta, meId: demo.meId, heritage: demo.heritage, demo: true };
     await FT.db.replaceAll({ people: demo.people, relationships: demo.relationships, meta, visits: demo.visits });
     Object.assign(S, { people: demo.people, relationships: demo.relationships, meta, visits: demo.visits });
-    recompute(); renderHeader(); renderHeritage(); toast('Sample family loaded'); show('people');
+    recompute(); renderHeader(); renderHeritage(); toast('Sample family loaded'); show(tab);
   }
 
   /* ---------- Misc ---------- */
@@ -1619,7 +1626,49 @@
   FT.app = { S, esc, showPath, uid, describe, avatar, waUrl, savePerson, saveRel, setMeta, recompute, refresh, openSheet, openForm,
     toast, ask, download, fname, attachMic, MIC_SVG_BTN, resizeImage };
 
+  /* ---------- Phone Back button closes the open card or dialog instead of leaving the app ---------- */
+  function backButtonClosesDialogs() {
+    let pendingBack = false, needPush = false;
+    const origShow = HTMLDialogElement.prototype.showModal;
+    HTMLDialogElement.prototype.showModal = function () {
+      origShow.call(this);
+      if (this._hist) return;
+      this._hist = true;
+      if (pendingBack) needPush = true; else history.pushState({ pbDlg: true }, '');
+      this.addEventListener('close', () => {
+        this._hist = false;
+        if (this._popped) { this._popped = false; return; }
+        if (needPush) { needPush = false; return; } // its history entry was never added
+        pendingBack = true; history.back();
+      }, { once: true });
+    };
+    window.addEventListener('popstate', () => {
+      if (pendingBack) { pendingBack = false; if (needPush) { needPush = false; history.pushState({ pbDlg: true }, ''); } return; }
+      const open = [...document.querySelectorAll('dialog[open]')].filter((d) => d._hist);
+      const top = open[open.length - 1]; if (!top) return;
+      top._popped = true;
+      const ev = new Event('cancel', { cancelable: true });
+      top.dispatchEvent(ev);
+      if (!ev.defaultPrevented && top.open) top.close();
+      if (top.open) top._popped = false;
+    });
+  }
+
+  // Landing-page link: ?demo=1&tab=map opens the sample family on the Map in one tap.
+  // Never replaces a real family: if you already have one, it just opens the tab.
+  async function openFromLink() {
+    const q = new URLSearchParams(location.search);
+    if (!q.has('demo') && !q.has('tab')) return;
+    const tab = ['people', 'map', 'data'].includes(q.get('tab')) ? q.get('tab') : 'people';
+    history.replaceState(history.state, '', location.pathname); // a refresh shouldn't repeat it
+    const mine = S.meta.meId && S.byId.has(S.meta.meId) && !S.meta.demo;
+    if (q.get('demo') === '1' && !mine) { if (S.meta.demo) show(tab); else await loadDemo(tab); return; }
+    if (q.get('demo') === '1' && mine) toast('You already have your own family here, so the sample stayed closed');
+    if (S.meta.meId && S.byId.has(S.meta.meId)) show(tab);
+  }
+
   async function boot() {
+    backButtonClosesDialogs();
     const data = await FT.db.loadAll();
     Object.assign(S, data);
     S.visits = data.visits || [];
@@ -1752,7 +1801,9 @@
       toast(v ? `Viewing everyone in ${cultName(v)} words. Nothing saved changes.` : "Back to your family's own words");
     };
     $('#aiOpen').onclick = openAi; $('#setupAi').onclick = openAi;
-    $('#setupDemo').onclick = loadDemo;
+    $('#setupDemo').onclick = () => loadDemo();
+    $('#setupType').onclick = () => { const f = $('#setupForm [name=name]'); f.scrollIntoView({ block: 'center' }); f.focus(); };
+    $('#mapKeyBtn').onclick = () => { const v = $('#view-map'), on = v.classList.toggle('key-open'); $('#mapKeyBtn').setAttribute('aria-expanded', String(on)); };
     $('#aiDlg').addEventListener('click', (e) => { if (e.target.closest('[data-act=close]') || e.target === $('#aiDlg')) $('#aiDlg').close(); });
     $('#aiCopy').onclick = async () => {
       const t = $('#aiPromptText').value;
@@ -1785,6 +1836,7 @@
     renderHeader();
     show(S.meta.meId && S.byId.has(S.meta.meId) ? 'people' : 'setup');
     checkShareInbox().catch(() => {});
+    openFromLink().catch(() => {});
 
     // Offline support (works when served over https or localhost)
     if (!FT.db.remote && !window.FT_STANDALONE && 'serviceWorker' in navigator && location.protocol.startsWith('http')) {

@@ -168,7 +168,7 @@ flowchart TD
   A --> B["Backup files you save<br/>JSON · CSV · ZIP · VCF"]
 ```
 
-No account and no server storage. Clearing your browser data erases it, so back up now and then. Voice typing uses the browser's speech service, and what you tell an AI chat goes to that company. Details: [docs/privacy.md](docs/privacy.md).
+No account, no server storage, no analytics, and no third-party requests: a Content-Security-Policy stops the page from sending data to any other site. Clearing your browser data erases it, so back up now and then. Voice typing uses the browser's speech service, and what you tell an AI chat goes to that company. Details: [docs/privacy.md](docs/privacy.md).
 
 ## Docs
 
@@ -178,6 +178,7 @@ No account and no server storage. Clearing your browser data erases it, so back 
 | [Data model](docs/data-model.md) | People, links, visits, CSV columns |
 | [AI prompt](docs/ai-prompt.md) | The prompt, tips and data dictionary |
 | [Privacy](docs/privacy.md) | What stays on your phone, what doesn't |
+| [Security](SECURITY.md) | How it's protected, its limits, how to report a problem |
 | [Developing](docs/developing.md) | Run it, test it, release it |
 
 ## Run it yourself
@@ -190,3 +191,15 @@ No account and no server storage. Clearing your browser data erases it, so back 
 ## Author
 
 Made by [akaseahawk](https://github.com/akaseahawk).
+
+## License
+
+[PolyForm Noncommercial 1.0.0](LICENSE.md). Free for personal, family, research, school, nonprofit and other noncommercial use. Commercial use needs separate permission, so [ask me](https://github.com/akaseahawk). Bundled libraries and fonts keep their own licenses: see [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
+
+```mermaid
+flowchart TD
+  U["Using Paribar"] --> Q{"Commercial?"}
+  Q -- "No: family, school,<br/>nonprofit, research" --> Y["Free to use,<br/>change and share"]
+  Q -- "Yes" --> A["Ask for<br/>permission"]
+```
+

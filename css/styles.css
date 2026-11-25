@@ -319,6 +319,15 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--r
 #groupBy { width: 100%; } #groupBy button { flex: 1; }
 .map-tools { left: 12px; flex-wrap: wrap; justify-content: flex-end; }
 .map-legend .rings-ic { width: 16px; height: 12px; color: var(--ink); }
+@keyframes flash { 0% { box-shadow: 0 0 0 3px var(--red); } 100% { box-shadow: 0 0 0 0 transparent; } }
+.panel.flash { animation: flash 1.6s ease-out; }
+.start-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.start-note { margin: .4rem 0 .6rem; }
+.map-key-btn { display: none; }
+@media (max-width: 640px) {
+  .map-key-btn { display: inline-flex; }
+  .view-map:not(.key-open) .map-legend > :not(.clear-hi) { display: none; } /* the key folds away; Clear highlight / Only the path stay */
+}
 .late-dot { display: inline-block; width: 11px; height: 11px; border-radius: 50%; border: 2px dashed var(--muted); }
 /* map: guide lines + labels */
 .mm-guides line { stroke: var(--line); stroke-width: 1.2; stroke-dasharray: 6 6; }
