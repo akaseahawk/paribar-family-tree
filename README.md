@@ -10,7 +10,7 @@ Every name in this repo is made up. Real family data never goes in this repo.
 
 ## Why I built this
 
-I went back to India after 20 years knowing only two relatives, both very elderly, and just their names and phone numbers. So I built Paribar (family in Bengali): it shows how everyone is connected and keeps their details in one place, so next time I can reach out to everyone directly.
+I went back to India after 20 years knowing only two relatives, both very elderly, and just their names and phone numbers. So I built Paribar (family in Bengali): it shows how everyone is connected, tells me what to call each person, and keeps their details in one place, so next time I can reach out to everyone directly.
 
 ```mermaid
 flowchart TD
@@ -25,6 +25,24 @@ flowchart TD
 - At every stop I showed everyone how they were all connected. My little nieces and nephews loved it.
 - The conversations were the best part: stories that never come up otherwise, like the wild thing a distant uncle once did. He's on the map now.
 - Family history still lives in memories, on paper, or in a photo on the wall. Paribar makes it digital, so you can share it with your kids and keep it, in theory, forever.
+
+### The right word for everyone
+
+In many families there's no plain "aunt" or "uncle". The word says whose side someone is on and whether they're older or younger, and using the right one is how you show respect. Paribar works it out automatically from how people are linked and who's older.
+
+```mermaid
+flowchart TD
+  A["An aunt or uncle"] --> M["Mom's side"]
+  A --> D["Dad's side"]
+  M --> M1["Mashi<br/>Mom's sister"]
+  D --> D1["Pishi<br/>Dad's sister"]
+  D --> D2["Dad's brother"]
+  D2 --> J["Older: Jethu"]
+  D2 --> K["Younger: Kaku"]
+```
+
+- Hindi does the same with Tauji and Chacha, Punjabi with Taya and Chacha, Korean with 큰아버지 and 작은아버지.
+- A birth year, or even "the 1960s", is enough for Paribar to know who's older. It can also say each word out loud.
 
 ### How the family got in
 

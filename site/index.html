@@ -73,7 +73,10 @@
     .privacy p { margin: 0; }
     footer { margin: 56px 0 0; padding: 22px 0 40px; border-top: 1px solid var(--line); color: var(--muted); font-size: .92rem; }
     footer .wrap { display: flex; flex-wrap: wrap; gap: 8px 18px; }
-      .trust { margin: 12px 0 0; color: var(--muted); font-size: .95rem; }
+      .words { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+    .words-more { margin-top: 12px; }
+    .words-more [lang="ko"] { white-space: nowrap; }
+    .trust { margin: 12px 0 0; color: var(--muted); font-size: .95rem; }
     .alt-link { align-self: center; padding: .6rem .4rem; font-weight: 600; }
     .terms li small { color: var(--muted); }
     .terms .more { background: none; border-style: dashed; }
@@ -122,7 +125,7 @@
 
     <h2>Why I built this</h2>
     <div class="story">
-      <p>I went back to India after 20 years knowing just two relatives, both very elderly, and only their names and phone numbers. So I built Paribar (family in Bengali) to show how everyone is connected and keep their details in one place, so next time I could reach out myself.</p>
+      <p>I went back to India after 20 years knowing just two relatives, both very elderly, and only their names and phone numbers. So I built Paribar (family in Bengali) to show how everyone is connected, tell me what to call each person, and keep their details in one place, so next time I could reach out myself.</p>
       <p>Then I spent a few weeks going home to home, through the family and close friends, showing everyone how they're all connected. My little nieces and nephews loved it. And mapping it out brought up stories that never come up otherwise, like the wild thing a distant uncle once did. He's on the map now.</p>
       <details>
         <summary>How the family got in</summary>
@@ -131,6 +134,16 @@
       </details>
       <p class="sign">With the holidays here and everyone together, I hope you get to have these conversations too.<br/>— <a href="https://github.com/akaseahawk">akaseahawk</a></p>
     </div>
+
+    <h2>The right word for everyone</h2>
+    <p class="body">In many families there's no plain "aunt" or "uncle". The word tells you whose side they're on and whether they're older or younger, and calling someone the right one is how you show respect. In Bengali:</p>
+    <div class="grid words">
+      <div class="card"><b lang="bn">পিসি Pishi</b><p>Dad's sister</p></div>
+      <div class="card"><b lang="bn">মাসি Mashi</b><p>Mom's sister</p></div>
+      <div class="card"><b lang="bn">জেঠু Jethu</b><p>Dad's older brother. His wife is Jethima.</p></div>
+      <div class="card"><b lang="bn">কাকু Kaku</b><p>Dad's younger brother. His wife is Kakima.</p></div>
+    </div>
+    <p class="body words-more">Other families split it the same way: Tauji and Chacha in Hindi, Taya and Chacha in Punjabi, <span lang="ko">큰아버지</span> and <span lang="ko">작은아버지</span> in Korean. Paribar works out each word for you from how people are linked and who's older (a birth year, or even "the 1960s", is enough), and can say it out loud. So you always know what to call someone, and say it respectfully.</p>
 
     <h2 id="see">Two ways to see your family</h2>
     <p class="body">Both are on the Map tab. Try them with the sample family.</p>
