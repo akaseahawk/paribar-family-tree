@@ -102,9 +102,9 @@ With the holidays here and families getting together, I hope you get to have the
 | ![Family circles map of the sample family, rings around Ishaan, friends on dashed blue lines](docs/images/map-circles.png) | ![Generations tree of the sample family, one column per generation, friends in their own band](docs/images/map-generations.png) |
 | You're in the middle; each ring is one more step away. | One column per generation, couples side by side, friends in their own band. |
 
-<img src="docs/images/people.png" width="360" alt="The People tab with the sample family in Cantonese: Kai shows as 細佬 Sai Lou, little brother" />
+<img src="docs/images/people.png" width="360" alt="The People tab with the sample family in Cantonese: Kai shows as 細佬 Sai Lou, little brother" /> <img src="docs/images/person-card.png" width="360" alt="A person card from the sample family: Lee Mei-ling, Po Po, with her portrait and how she is related" />
 
-**Faces on the map.** Add a photo and it fills that person's circle on both maps, so kids can put faces to names. Old ancestor photos work too: snap the one on the wall.
+**Faces on the map.** Add a photo and it fills that person's circle on both maps, so kids can put faces to names. Old ancestor photos work too: snap the one on the wall. The sample family's faces are illustrations of made-up people.
 
 **Friends can be family too.** Add the neighbor who's practically an uncle, Mom's best friend the kids call Auntie, a colleague or a classmate. They appear on both maps, linked through whoever they know, and their families can join too.
 

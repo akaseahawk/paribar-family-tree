@@ -74,7 +74,7 @@ FT.demo = (() => {
     const people = PEOPLE.map(([k, name, gender, dob, x]) => {
       id[k] = uid();
       const { isMe, ...rest } = x;
-      return { id: id[k], name, gender, dob: /^\d{4}-\d{2}-\d{2}$/.test(dob) ? dob : '', birthYear: dob.slice(0, 4), photos: [], createdAt: now, ...rest };
+      return { id: id[k], name, gender, dob: /^\d{4}-\d{2}-\d{2}$/.test(dob) ? dob : '', birthYear: dob.slice(0, 4), photos: FT.demoPhotos && FT.demoPhotos[k] ? [FT.demoPhotos[k]] : [], createdAt: now, ...rest };
     });
     const R = (type, a, b, extra = {}) => ({ id: uid(), type, from: id[a], to: id[b], createdAt: now, ...extra });
     const rels = [];

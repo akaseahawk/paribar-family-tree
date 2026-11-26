@@ -2,9 +2,9 @@
    App files: network-first (always the newest version when online, cached copy when offline),
    installed with cache: 'reload' so a stale browser cache can't mix old and new files.
    Fonts are served from this site too, so nothing is requested from anywhere else. */
-const CACHE = 'paribar-v2015';
+const CACHE = 'paribar-v2016';
 // The share inbox and caches are named per app, so other sites on the same origin (github.io) are left alone
-const APP = ['./', 'index.html', 'css/styles.css', 'css/fonts.css', 'js/db.js', 'js/themes.js', 'js/cultures.js', 'js/kinship.js', 'js/demo.js', 'js/aiprompt.js', 'js/family.js', 'js/mindmap.js', 'js/io.js', 'js/speak.js', 'js/checks.js', 'js/visits.js', 'js/dates.js', 'js/treeimage.js', 'js/dupes.js', 'js/app.js',
+const APP = ['./', 'index.html', 'css/styles.css', 'css/fonts.css', 'js/db.js', 'js/themes.js', 'js/cultures.js', 'js/kinship.js', 'js/demo-photos.js', 'js/demo.js', 'js/aiprompt.js', 'js/family.js', 'js/mindmap.js', 'js/io.js', 'js/speak.js', 'js/checks.js', 'js/visits.js', 'js/dates.js', 'js/treeimage.js', 'js/dupes.js', 'js/app.js',
   'vendor/d3.min.js', 'vendor/fflate.min.js', 'manifest.webmanifest', 'icons/icon.svg', 'icons/icon-192.png', 'icons/icon-512.png',
   'fonts/HindSiliguri-400-bengali.woff2', 'fonts/HindSiliguri-400-latin-ext.woff2', 'fonts/HindSiliguri-400-latin.woff2', 'fonts/HindSiliguri-500-bengali.woff2', 'fonts/HindSiliguri-500-latin-ext.woff2', 'fonts/HindSiliguri-500-latin.woff2', 'fonts/HindSiliguri-600-bengali.woff2', 'fonts/HindSiliguri-600-latin-ext.woff2', 'fonts/HindSiliguri-600-latin.woff2', 'fonts/TiroBangla-400-bengali.woff2', 'fonts/TiroBangla-400-latin-ext.woff2', 'fonts/TiroBangla-400-latin.woff2'];
 self.addEventListener('install', (e) => e.waitUntil(caches.open(CACHE).then((c) => c.addAll(APP.map((u) => new Request(u, { cache: 'reload' })))).then(() => self.skipWaiting())));
