@@ -514,7 +514,16 @@
     const adj = S.mapLayer === 'all' ? S.adj : FT.kin.buildGraph(people, rels);
     return { people, rels, adj, ids };
   }
+  // The map fills exactly the space between the header and the tab bar, whatever the header's height
+  // (the Language and Theme menus made it taller), so the bottom controls and the person card stay visible
+  function sizeMap() {
+    const c = $('#mapCanvas'), tb = $('#tabbar'); if (!c || !tb) return;
+    const top = c.getBoundingClientRect().top + window.scrollY;
+    const h = Math.max(320, Math.round(window.innerHeight - top - tb.getBoundingClientRect().height));
+    $('#view-map').style.setProperty('--map-h', h + 'px');
+  }
   function drawMap(fit = true) {
+    sizeMap();
     const sub = (S.mapSub = mapSubset());
     if (!sub.ids.has(S.mapFocus)) setFocus(S.meta.meId); // e.g. centered on a friend, then switched to Family
     const gens = sub.adj === S.adj ? mapGens() : FT.fam.generations(S.mapFocus, sub.adj);
@@ -523,6 +532,7 @@
     $('#mapLayer').value = S.mapLayer;
     $$('#mapMode button').forEach((b) => b.classList.toggle('is-on', b.dataset.mode === S.mapMode));
     $('#mapDepth').value = String(S.mapDepth);
+    const away = S.mapFocus !== S.meta.meId; $('#mapMe').textContent = away ? 'Back to me' : 'Me'; $('#mapMe').classList.toggle('primary', away);
     relOptions($('#mapHi'), 'None', S.mapHi && S.mapHi.kind === 'rel' ? S.mapHi.value : '');
     applyHi(); // highlights stay on through redraws
   }
@@ -551,6 +561,7 @@
   function resetMap() {
     Object.assign(S, { mapLayer: 'all', mapDepth: 99, mapHi: null }); setFocus(S.meta.meId);
     $('#mapFind').value = ''; $('#mapFindList').hidden = true; $('#mapCard').hidden = true;
+    $('#view-map').classList.remove('key-open'); $('#mapKeyBtn').setAttribute('aria-expanded', 'false');
     drawMap(true); toast('Map reset');
   }
   // "me" when centred on me, otherwise the person's short name ("2 degrees from Masi")
@@ -571,6 +582,7 @@
       <span>${d.called ? `<b class="called">${esc(d.called)}</b> · ` : ''}${d.bnScript ? `<span lang="${langAttr(d)}">${esc(d.bnScript)}</span>${d.bn ? ' ' + esc(d.bn) : ''} · ` : ''}${esc(d.en)} ${id !== S.meta.meId ? FT.speak.button() : ''}</span></div>
       <div class="mc-contact">${infoIcons(p)}
         <span class="mc-quick">${p.phone ? `<a class="icon-btn" href="tel:${esc(p.phone.replace(/[^\d+]/g, ''))}" aria-label="Call">${icon('phone')}</a>` : ''}${p.phone && p.whatsapp !== false ? `<a class="icon-btn" href="${waUrl(p.phone)}" target="_blank" rel="noopener" aria-label="WhatsApp">${icon('whatsapp')}</a>` : ''}${p.email ? `<a class="icon-btn" href="mailto:${esc(p.email)}" aria-label="Email">${icon('email')}</a>` : ''}${p.address || p.city ? `<a class="icon-btn" href="${mapsUrl([p.address, p.city].filter(Boolean).join(', '))}" target="_blank" rel="noopener" aria-label="Open in Maps">${icon('address')}</a>` : ''}</span></div>
+      ${editing ? '' : `<div class="mc-actions">${id !== S.mapFocus ? '<button class="btn small primary" data-act="center">Center here</button>' : ''}${S.paths.has(id) && id !== S.meta.meId ? '<button class="btn small" data-act="path">Path from me</button>' : ''}${id !== S.meta.meId ? '<button class="btn small" data-act="family">Their family + path</button>' : ''}<button class="btn small" data-act="trail">Trail to …</button><button class="btn small" data-act="open">Open card</button></div>`}
       <p class="mc-gen">${esc(genLine(p, d))}${degreeText(id)}</p>
       ${bornEditor(p, 'mc')}
       ${d.nuance ? `<p class="mc-nuance"><b>Nuance:</b> ${esc(d.nuance)}</p>` : ''}
@@ -579,7 +591,7 @@
           <div class="mc-actions"><button class="btn small" data-act="cancel">Cancel</button><button class="btn small primary" data-act="save">Save notes</button></div>`
         : `<button class="mc-note-view" data-act="edit" aria-label="Edit notes">${p.notes ? esc(p.notes).replace(/\n/g, '<br>') : '<span class="hint">No notes yet — tap to add</span>'}</button>`}
       </div>
-      ${editing ? '' : `<div class="mc-actions">${S.paths.has(id) && id !== S.meta.meId ? '<button class="btn small" data-act="path">Path from me</button>' : ''}${id !== S.meta.meId ? '<button class="btn small" data-act="family">Their family + path</button>' : ''}<button class="btn small" data-act="trail">Trail to …</button><button class="btn small" data-act="center">Center here</button><button class="btn small primary" data-act="open">Open card</button></div>`}`;
+      `;
     card.hidden = false;
     card.onclick = async (e) => {
       const b = e.target.closest('[data-act]'); if (!b) return;

@@ -450,10 +450,21 @@ FT.mindmap = (() => {
   }
   const svgNode = () => svg.node();
 
+  // Room taken by the Find row at the top and the map buttons at the bottom (two rows on phones)
+  function reserved() {
+    const c = svg.node().getBoundingClientRect();
+    const find = document.querySelector('.map-find'), tools = document.querySelector('.map-tools');
+    const legend = document.querySelector('.view-map.key-open .map-legend');
+    let top = 96, bottom = 70;
+    if (find && find.offsetHeight) top = Math.max(top, find.getBoundingClientRect().bottom - c.top + 12);
+    if (legend && legend.offsetHeight) top = Math.max(top, legend.getBoundingClientRect().bottom - c.top + 8);
+    if (tools && tools.offsetHeight) bottom = Math.max(bottom, c.bottom - tools.getBoundingClientRect().top + 12);
+    return { top, bottom };
+  }
   // Zoom so a box (map coordinates) fills the screen; zooming out is allowed at least that far
   function fitBox(x0, y0, x1, y1) {
     const el = svg.node(); const W = el.clientWidth || 360, H = el.clientHeight || 520;
-    const pad = 20, top = 96, bottom = 70; // room for the search box, legend and map buttons
+    const pad = 20, { top, bottom } = reserved(); // room for the search box, legend and map buttons
     const k = Math.min(1.1, (W - pad * 2) / Math.max(1, x1 - x0), (H - top - bottom) / Math.max(1, y1 - y0));
     zoom.scaleExtent([Math.min(0.2, k * 0.6), 3]);
     const t = d3.zoomIdentity.translate(W / 2 - ((x0 + x1) / 2) * k, top + (H - top - bottom) / 2 - ((y0 + y1) / 2) * k).scale(k);
@@ -465,11 +476,12 @@ FT.mindmap = (() => {
   function fitView(focusId) {
     const bb = gRoot.node().getBBox(); if (!bb.width) return;
     const el = svg.node(); const W = el.clientWidth || 360, H = el.clientHeight || 520;
-    const k = Math.min(1.1, (W - 40) / bb.width, (H - 166) / bb.height);
+    const { top, bottom } = reserved();
+    const k = Math.min(1.1, (W - 40) / bb.width, (H - top - bottom) / bb.height);
     const m = focusId && lastMembers.get(focusId);
     if (k < MIN_READABLE && m) {
       zoom.scaleExtent([Math.min(0.2, k * 0.6), 3]);
-      svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity.translate(W / 2 - m.x * MIN_READABLE, 96 + (H - 166) / 2 - m.y * MIN_READABLE).scale(MIN_READABLE));
+      svg.transition().duration(400).call(zoom.transform, d3.zoomIdentity.translate(W / 2 - m.x * MIN_READABLE, top + (H - top - bottom) / 2 - m.y * MIN_READABLE).scale(MIN_READABLE));
       return;
     }
     fitBox(bb.x, bb.y, bb.x + bb.width, bb.y + bb.height);
@@ -477,7 +489,7 @@ FT.mindmap = (() => {
   // The tall Generations tree: fill the screen width (readable), centered down the page on one person
   function fitWidth(id) {
     const el = svg.node(), bb = gRoot.node().getBBox(); if (!bb.width) return;
-    const W = el.clientWidth || 360, H = el.clientHeight || 520, top = 96, bottom = 70;
+    const W = el.clientWidth || 360, H = el.clientHeight || 520, { top, bottom } = reserved();
     if (bb.height * Math.min(1.1, (W - 40) / bb.width) <= H - top - bottom) { fitView(); return; } // it all fits anyway
     const k = Math.min(1.1, (W - 40) / bb.width);
     const m = lastMembers.get(id);

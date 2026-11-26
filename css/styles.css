@@ -175,7 +175,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--r
 
 /* ---------- Mind map ---------- */
 .view-map { position: relative; margin: -12px -16px 0; }
-.map-canvas { height: calc(100dvh - 64px - var(--tab-h) - env(safe-area-inset-bottom) - 6px); min-height: 380px; background:
+.map-canvas { height: var(--map-h, calc(100dvh - 64px - var(--tab-h) - env(safe-area-inset-bottom) - 6px)); min-height: 380px; background:
   radial-gradient(circle at 50% 50%, rgba(166, 30, 36, .05), transparent 60%), var(--bg); touch-action: none; }
 .mm-svg { width: 100%; height: 100%; display: block; }
 .mm-link { fill: none; stroke-width: 2; stroke-opacity: .55; }
@@ -572,3 +572,7 @@ input:focus, select:focus, textarea:focus { outline: none; border-color: var(--r
 .ai-dict-list { display: grid; gap: 6px; margin-top: 6px; }
 .ai-dict-row { display: grid; gap: 1px; padding: 6px 10px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); font-size: .9rem; }
 .ai-dict-row small { color: var(--muted); }
+/* phones: the key (and Clear highlight / Show everyone) sit below the Find row and the Key button */
+@media (max-width: 640px) { .view-map .map-legend { top: 108px; } }
+/* on the map, messages pop up above the map buttons instead of over them */
+body:has(#view-map:not([hidden])) .toast { bottom: calc(var(--tab-h) + env(safe-area-inset-bottom) + 120px); }

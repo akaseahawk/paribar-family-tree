@@ -1,6 +1,6 @@
 {
   "name": "paribar",
-  "version": "2.0.14",
+  "version": "2.0.15",
   "private": true,
   "description": "Offline family tree and contact book with kinship terms in 20+ heritages",
   "scripts": {

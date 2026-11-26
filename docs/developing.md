@@ -32,9 +32,9 @@ flowchart TD
 ```
 
 ## Versioning checklist
-- `index.html`: the version label (`Paribar v2.0.14 …`) and every `?v=` tag.
-- `sw.js`: `CACHE = 'paribar-v2014'`.
-- `package.json`: `"version": "2.0.14"`.
+- `index.html`: the version label (`Paribar v2.0.15 …`) and every `?v=` tag.
+- `sw.js`: `CACHE = 'paribar-v2015'`.
+- `package.json`: `"version": "2.0.15"`.
 - New files the app needs offline go in the `APP` list in `sw.js`.
 - `docs/ai-prompt.md`: regenerate with `node scripts/export-prompt.js` after changing `js/aiprompt.js`.
 
