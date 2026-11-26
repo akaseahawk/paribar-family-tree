@@ -9,7 +9,7 @@
   <meta name="referrer" content="no-referrer" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Paribar · পরিবার — see how everyone is connected</title>
-  <meta name="description" content="A free family tree and contact book for your phone, in your family's own words. See how everyone is connected, friends included. 24 heritages. No account, works offline, stays on your phone." />
+  <meta name="description" content="A free family tree and contact book for your phone, in your family's own words. See how everyone is connected, friends included. 20+ heritages. No account, works offline, stays on your phone." />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Paribar: see how everyone is connected" />
   <meta property="og:description" content="A free family tree and contact book for your phone, in your family's own words. No account, works offline, stays on your phone." />
@@ -76,6 +76,13 @@
       .words { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
     .words-more { margin-top: 12px; }
     .words-more [lang="ko"] { white-space: nowrap; }
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+    .herit { border-collapse: collapse; width: 100%; min-width: 620px; font-size: .95rem; }
+    .herit th, .herit td { padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .herit thead th { font-size: .82rem; color: var(--muted); font-weight: 600; background: var(--bg); }
+    .herit tbody th { font-weight: 600; position: sticky; left: 0; background: var(--surface); min-width: 150px; max-width: 170px; }
+    .herit tbody tr:last-child th, .herit tbody tr:last-child td { border-bottom: 0; }
+    @media (max-width: 600px) { .herit { font-size: .86rem; min-width: 520px; } .herit th, .herit td { padding: 7px 9px; } .herit tbody th { min-width: 104px; max-width: 120px; } }
     .trust { margin: 12px 0 0; color: var(--muted); font-size: .95rem; }
     .alt-link { align-self: center; padding: .6rem .4rem; font-weight: 600; }
     .terms li small { color: var(--muted); }
@@ -104,7 +111,7 @@
 
   <main class="wrap">
     <h1>Mashi, Bua, 姨媽, Tía, Wɔfa: know who's who</h1>
-    <p class="lead">A free family tree and contact book for your phone. See how everyone is connected, the friends who are family too, and what to call each person, in 24 heritages.</p>
+    <p class="lead">A free family tree and contact book for your phone. See how everyone is connected, the friends who are family too, and what to call each person, in 20+ heritages.</p>
     <div class="cta">
       <a class="btn primary" id="heroCta" href="app/?demo=1&amp;tab=map">See the sample family</a>
       <a class="alt-link" href="app/">or start your own</a>
@@ -144,6 +151,41 @@
       <div class="card"><b lang="bn">কাকু Kaku</b><p>Dad's younger brother. His wife is Kakima.</p></div>
     </div>
     <p class="body words-more">Other families split it the same way: Tauji and Chacha in Hindi, Taya and Chacha in Punjabi, <span lang="ko">큰아버지</span> and <span lang="ko">작은아버지</span> in Korean. Paribar works out each word for you from how people are linked and who's older (a birth year, or even "the 1960s", is enough), and can say it out loud. So you always know what to call someone, and say it respectfully.</p>
+
+    <h2 id="heritages">20+ heritages, one sample each</h2>
+    <p class="body">What the app calls four of the sample family's relatives, in every heritage it knows. Swipe the table sideways on a phone.</p>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="Family words in each heritage">
+      <table class="herit">
+        <thead><tr><th scope="col">Heritage</th><th scope="col">Mom's sister</th><th scope="col">Dad's sister</th><th scope="col">Dad's younger brother</th><th scope="col">Mom's mom</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">Bengali</th><td lang="bn">মাসি Mashi</td><td lang="bn">পিসি Pishi</td><td lang="bn">কাকু Kaku</td><td lang="bn">দিদিমা Didima</td></tr>
+          <tr><th scope="row">Hindi / North Indian</th><td lang="hi">मौसी Mausi</td><td lang="hi">बुआ Bua</td><td lang="hi">चाचा Chacha</td><td lang="hi">नानी Nani</td></tr>
+          <tr><th scope="row">Punjabi</th><td lang="pa">ਮਾਸੀ Masi</td><td lang="pa">ਭੂਆ Bhua</td><td lang="pa">ਚਾਚਾ Chacha</td><td lang="pa">ਨਾਨੀ Nani</td></tr>
+          <tr><th scope="row">Gujarati</th><td lang="gu">માસી Masi</td><td lang="gu">ફોઈ Foi</td><td lang="gu">કાકા Kaka</td><td lang="gu">નાની Nani</td></tr>
+          <tr><th scope="row">Cantonese</th><td lang="zh-HK">姨媽 Ji Maa</td><td lang="zh-HK">姑媽 Gu Maa</td><td lang="zh-HK">叔叔 Suk Suk</td><td lang="zh-HK">婆婆 Po Po</td></tr>
+          <tr><th scope="row">Mandarin</th><td lang="zh-CN">姨妈 Yímā</td><td lang="zh-CN">姑姑 Gūgu</td><td lang="zh-CN">叔叔 Shūshu</td><td lang="zh-CN">外婆 Wàipó</td></tr>
+          <tr><th scope="row">Japanese</th><td lang="ja">伯母さん Obasan</td><td lang="ja">伯母さん Obasan</td><td lang="ja">叔父さん Ojisan</td><td lang="ja">おばあさん Obāsan</td></tr>
+          <tr><th scope="row">Korean</th><td lang="ko">이모 Imo</td><td lang="ko">고모 Gomo</td><td lang="ko">작은아버지 Jageunabeoji</td><td lang="ko">외할머니 Oehalmeoni</td></tr>
+          <tr><th scope="row">Vietnamese</th><td lang="vi">Bác</td><td lang="vi">Bác</td><td lang="vi">Chú</td><td lang="vi">Bà ngoại</td></tr>
+          <tr><th scope="row">Arabic</th><td lang="ar">خالتو Khalto</td><td lang="ar">عمتو ʿAmmto</td><td lang="ar">عمو ʿAmmo</td><td lang="ar">تيتا Teta</td></tr>
+          <tr><th scope="row">Ghanaian (Akan: Twi, Asante, Fante)</th><td lang="ak">Maame panin</td><td lang="ak">Sewaa</td><td lang="ak">Papa kumaa</td><td lang="ak">Nana baa</td></tr>
+          <tr><th scope="row">Nigerian (Yoruba)</th><td lang="yo">Ẹ̀gbọ́n ìyá</td><td lang="yo">Ẹ̀gbọ́n bàbá</td><td lang="yo">Àbúrò bàbá</td><td lang="yo">Ìyá àgbà</td></tr>
+          <tr><th scope="row">Spanish (Mexico &amp; Latin America)</th><td lang="es-MX">Tía</td><td lang="es-MX">Tía</td><td lang="es-MX">Tío</td><td lang="es-MX">Abuela</td></tr>
+          <tr><th scope="row">Spanish (Puerto Rico &amp; Dominican Rep.)</th><td lang="es-PR">Titi</td><td lang="es-PR">Titi</td><td lang="es-PR">Tío</td><td lang="es-PR">Abuela</td></tr>
+          <tr><th scope="row">Spanish (Argentina &amp; Uruguay)</th><td lang="es-AR">Tía</td><td lang="es-AR">Tía</td><td lang="es-AR">Tío</td><td lang="es-AR">Nona</td></tr>
+          <tr><th scope="row">Haitian Creole</th><td lang="ht">Matant</td><td lang="ht">Matant</td><td lang="ht">Tonton</td><td lang="ht">Grann</td></tr>
+          <tr><th scope="row">Jamaican Patois</th><td lang="en-JM">Auntie</td><td lang="en-JM">Auntie</td><td lang="en-JM">Uncle</td><td lang="en-JM">Granny</td></tr>
+          <tr><th scope="row">English (American)</th><td lang="en">Aunt</td><td lang="en">Aunt</td><td lang="en">Uncle</td><td lang="en">Grandma</td></tr>
+          <tr><th scope="row">French</th><td lang="fr">Tante</td><td lang="fr">Tante</td><td lang="fr">Oncle</td><td lang="fr">Grand-mère</td></tr>
+          <tr><th scope="row">German</th><td lang="de">Tante</td><td lang="de">Tante</td><td lang="de">Onkel</td><td lang="de">Oma</td></tr>
+          <tr><th scope="row">Irish (Gaelic)</th><td lang="ga">Aintín</td><td lang="ga">Aintín</td><td lang="ga">Uncail</td><td lang="ga">Mamó</td></tr>
+          <tr><th scope="row">Italian</th><td lang="it">Zia</td><td lang="it">Zia</td><td lang="it">Zio</td><td lang="it">Nonna</td></tr>
+          <tr><th scope="row">Romanian</th><td lang="ro">Mătușă</td><td lang="ro">Mătușă</td><td lang="ro">Unchi</td><td lang="ro">Bunică</td></tr>
+          <tr><th scope="row">Swedish</th><td lang="sv">Moster</td><td lang="sv">Faster</td><td lang="sv">Farbror</td><td lang="sv">Mormor</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="body words-more">Some heritages use one word where others use four. That's the point: Paribar uses whichever your family does. Don't see yours? <a href="https://github.com/akaseahawk/paribar-family-tree/issues/new?title=Heritage%20request:%20">Ask me</a>, or just message me.</p>
 
     <h2 id="see">Two ways to see your family</h2>
     <p class="body">Both are on the Map tab. Try them with the sample family.</p>
@@ -225,7 +267,7 @@
 
     <h2>Everything it does</h2>
     <div class="grid">
-      <div class="card"><b>24 heritages</b><p>Bengali, Hindi, Punjabi, Gujarati, Cantonese, Mandarin, Japanese, Korean, Vietnamese, Arabic, Ghanaian (Akan: Twi, Asante, Fante), Nigerian (Yoruba), Spanish (Mexico &amp; Latin America, Puerto Rico &amp; Dominican Republic, Argentina &amp; Uruguay), Haitian Creole, Jamaican Patois, English, French, German, Irish, Italian, Romanian, Swedish. <a href="https://github.com/akaseahawk/paribar-family-tree/issues/new?title=Heritage%20request:%20">Don't see yours? Ask me</a>, or just message me.</p></div>
+      <div class="card"><b>20+ heritages</b><p>From Bengali and Cantonese to Akan, Haitian Creole and Romanian. <a href="#heritages">See a sample of each</a>.</p></div>
       <div class="card"><b>Mixed families</b><p>Each side keeps its own words. The Language menu shows everyone in another heritage's words.</p></div>
       <div class="card"><b>How any two people are related</b><p>Pick two people and see the path between them, step by step.</p></div>
       <div class="card"><b>Your files</b><p>Back up to JSON, CSV (opens in Excel), ZIP with photos, or contacts (.vcf). Imports Excel too.</p></div>

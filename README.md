@@ -1,6 +1,6 @@
 # Paribar · পরিবার
 
-See how everyone is connected: your whole family, and the friends who are family too, on a **Generations tree** and in **Family circles** around you. Free, offline, and in your family's own words (Mashi, 姨媽, Tía, Bua …), across 24 heritages. Don't see yours? [Let me know](https://github.com/akaseahawk/paribar-family-tree/issues/new?title=Heritage%20request:%20) and I'll add it.
+See how everyone is connected: your whole family, and the friends who are family too, on a **Generations tree** and in **Family circles** around you. Free, offline, and in your family's own words (Mashi, 姨媽, Tía, Bua …), across 20+ heritages. Don't see yours? [Let me know](https://github.com/akaseahawk/paribar-family-tree/issues/new?title=Heritage%20request:%20) and I'll add it.
 
 - **Use it:** [akaseahawk.github.io/paribar-family-tree](https://akaseahawk.github.io/paribar-family-tree/)
 - **Open the app directly:** [/app/](https://akaseahawk.github.io/paribar-family-tree/app/)
@@ -43,6 +43,37 @@ flowchart TD
 
 - Hindi does the same with Tauji and Chacha, Punjabi with Taya and Chacha, Korean with 큰아버지 and 작은아버지.
 - A birth year, or even "the 1960s", is enough for Paribar to know who's older. It can also say each word out loud.
+
+### 20+ heritages, one sample each
+
+What Paribar calls four of the sample family's relatives in every heritage it knows. Some use one word where others use four; Paribar uses whichever your family does. Don't see yours? [Ask me](https://github.com/akaseahawk/paribar-family-tree/issues/new?title=Heritage%20request:%20).
+
+| Heritage | Mom's sister | Dad's sister | Dad's younger brother | Mom's mom |
+|---|---|---|---|---|
+| Bengali | মাসি Mashi | পিসি Pishi | কাকু Kaku | দিদিমা Didima |
+| Hindi / North Indian | मौसी Mausi | बुआ Bua | चाचा Chacha | नानी Nani |
+| Punjabi | ਮਾਸੀ Masi | ਭੂਆ Bhua | ਚਾਚਾ Chacha | ਨਾਨੀ Nani |
+| Gujarati | માસી Masi | ફોઈ Foi | કાકા Kaka | નાની Nani |
+| Cantonese | 姨媽 Ji Maa | 姑媽 Gu Maa | 叔叔 Suk Suk | 婆婆 Po Po |
+| Mandarin | 姨妈 Yímā | 姑姑 Gūgu | 叔叔 Shūshu | 外婆 Wàipó |
+| Japanese | 伯母さん Obasan | 伯母さん Obasan | 叔父さん Ojisan | おばあさん Obāsan |
+| Korean | 이모 Imo | 고모 Gomo | 작은아버지 Jageunabeoji | 외할머니 Oehalmeoni |
+| Vietnamese | Bác | Bác | Chú | Bà ngoại |
+| Arabic | خالتو Khalto | عمتو ʿAmmto | عمو ʿAmmo | تيتا Teta |
+| Ghanaian (Akan: Twi, Asante, Fante) | Maame panin | Sewaa | Papa kumaa | Nana baa |
+| Nigerian (Yoruba) | Ẹ̀gbọ́n ìyá | Ẹ̀gbọ́n bàbá | Àbúrò bàbá | Ìyá àgbà |
+| Spanish (Mexico & Latin America) | Tía | Tía | Tío | Abuela |
+| Spanish (Puerto Rico & Dominican Rep.) | Titi | Titi | Tío | Abuela |
+| Spanish (Argentina & Uruguay) | Tía | Tía | Tío | Nona |
+| Haitian Creole | Matant | Matant | Tonton | Grann |
+| Jamaican Patois | Auntie | Auntie | Uncle | Granny |
+| English (American) | Aunt | Aunt | Uncle | Grandma |
+| French | Tante | Tante | Oncle | Grand-mère |
+| German | Tante | Tante | Onkel | Oma |
+| Irish (Gaelic) | Aintín | Aintín | Uncail | Mamó |
+| Italian | Zia | Zia | Zio | Nonna |
+| Romanian | Mătușă | Mătușă | Unchi | Bunică |
+| Swedish | Moster | Faster | Farbror | Mormor |
 
 ### How the family got in
 
@@ -98,7 +129,7 @@ mindmap
       Colleagues
       Their families
     Family words
-      24 heritages
+      20+ heritages
       Mixed families
     Keep in touch
       Phones

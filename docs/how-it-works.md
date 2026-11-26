@@ -7,7 +7,7 @@ Paribar is plain HTML, CSS and JavaScript. No framework, no build step for the a
 ```mermaid
 flowchart TD
   UI["app.js<br/>screens and forms"] --> K["kinship.js<br/>paths and words"]
-  K --> C["cultures.js<br/>24 heritages"]
+  K --> C["cultures.js<br/>20+ heritages"]
   UI --> M["mindmap.js<br/>maps, D3"]
   M --> F["family.js<br/>generations"]
   F --> K
@@ -21,7 +21,7 @@ themes, aiprompt, checks, dupes, visits, dates, speak, treeimage and demo are he
 |---|---|
 | `js/app.js` | Screens, forms, placing imported people, export |
 | `js/kinship.js` | Finds the path from you to anyone and picks the word for it |
-| `js/cultures.js` | Family words for 24 heritages, with an English fallback that handles "second cousin once removed" |
+| `js/cultures.js` | Family words for 20+ heritages, with an English fallback that handles "second cousin once removed" |
 | `js/family.js` | Couples, generations, steps between people, tree layout |
 | `js/mindmap.js` | The Family circles map (degrees of separation) and the Generations tree |
 | `js/io.js` | Reads CSV, JSON, Excel (.xlsx), ZIP and contacts; writes JSON, CSV, ZIP and .vcf; cleans every imported value |
