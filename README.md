@@ -22,7 +22,7 @@ flowchart TD
 ```
 
 - For a few weeks I went home to home, across the family and close friends.
-- At every stop I showed everyone how they were all connected. My little nieces and nephews loved it.
+- At every stop I showed everyone how they were all connected. We took everyone's picture and snapped old photos of ancestors, so every face is on the map. My little nieces and nephews loved it.
 - The conversations were the best part: stories that never come up otherwise, like the wild thing a distant uncle once did. He's on the map now.
 - Family history still lives in memories, on paper, or in a photo on the wall. Paribar makes it digital, so you can share it with your kids and keep it, in theory, forever.
 
@@ -103,6 +103,8 @@ With the holidays here and families getting together, I hope you get to have the
 | You're in the middle; each ring is one more step away. | One column per generation, couples side by side, friends in their own band. |
 
 <img src="docs/images/people.png" width="360" alt="The People tab with the sample family in Cantonese: Kai shows as 細佬 Sai Lou, little brother" />
+
+**Faces on the map.** Add a photo and it fills that person's circle on both maps, so kids can put faces to names. Old ancestor photos work too: snap the one on the wall.
 
 **Friends can be family too.** Add the neighbor who's practically an uncle, Mom's best friend the kids call Auntie, a colleague or a classmate. They appear on both maps, linked through whoever they know, and their families can join too.
 
