@@ -213,7 +213,7 @@ The full prompt and data dictionary are in [docs/ai-prompt.md](docs/ai-prompt.md
 
 ```mermaid
 flowchart TD
-  S["GitHub Pages<br/>app code only"] --> A["Paribar app"]
+  S["GitHub Pages<br/>app code and fonts only"] --> A["Paribar app"]
   F["Google Fonts<br/>fonts only"] --> A
   A <--> P["Your phone's browser<br/>IndexedDB"]
   A --> B["Backup files you save<br/>JSON · CSV · ZIP · VCF"]
